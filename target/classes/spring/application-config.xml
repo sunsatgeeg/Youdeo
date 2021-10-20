@@ -8,7 +8,6 @@
 	<!-- 데이타소스설정 import-->
 	<import resource="datasource-config.xml"/>
 	<context:component-scan base-package="com.geeg.youdeo">
-		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	

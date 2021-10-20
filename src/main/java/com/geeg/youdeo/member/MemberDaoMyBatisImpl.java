@@ -36,8 +36,7 @@ public class MemberDaoMyBatisImpl implements MemberDao{
 
 	@Override
 	public Member findMember(String memberId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"findMember",memberId);
 	}
 
 	@Override
