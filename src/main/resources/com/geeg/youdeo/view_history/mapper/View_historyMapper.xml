@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.geeg.youdeo.user.mapper.UserMapper">
+<mapper namespace="com.geeg.youdeo.video_history.mapper.Video_historyMapper">
 
 	<insert id="create" parameterType="com.geeg.youdeo.user.User">
 		insert into userinfo(u_id, u_password, u_name, u_email, u_phone) 

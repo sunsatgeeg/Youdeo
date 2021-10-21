@@ -1,10 +1,6 @@
 package com.geeg.youdeo.user;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
-
-import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

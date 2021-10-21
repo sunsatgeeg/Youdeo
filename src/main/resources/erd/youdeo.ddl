@@ -1,7 +1,7 @@
 DROP TABLE view_history CASCADE CONSTRAINTS;
 DROP TABLE subscription CASCADE CONSTRAINTS;
 DROP TABLE v_comment CASCADE CONSTRAINTS;
-DROP TABLE upload_video CASCADE CONSTRAINTS;
+DROP TABLE video CASCADE CONSTRAINTS;
 DROP TABLE userinfo CASCADE CONSTRAINTS;
 
 CREATE TABLE userinfo(
@@ -13,11 +13,11 @@ CREATE TABLE userinfo(
 );
 
 
-CREATE TABLE upload_video(
+CREATE TABLE video(
 		v_no                          		NUMBER(10)		 NULL ,
 		v_title                       		VARCHAR2(100)		 NULL ,
 		v_description                 		VARCHAR2(100)		 NULL ,
-		uv_d                          		DATE		 DEFAULT sysdate		 NULL ,
+		v_date                        		DATE		 DEFAULT sysdate		 NULL ,
 		v_category                    		VARCHAR2(100)		 NULL ,
 		v_views                       		NUMBER(10)		 DEFAULT 0		 NULL ,
 		v_good                        		NUMBER(10)		 DEFAULT 0		 NULL ,
@@ -25,6 +25,9 @@ CREATE TABLE upload_video(
 		u_id                          		VARCHAR2(100)		 NULL 
 );
 
+DROP SEQUENCE video_v_no_SEQ;
+
+CREATE SEQUENCE video_v_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE v_comment(
 		c_no                          		NUMBER(10)		 NULL ,
@@ -34,6 +37,9 @@ CREATE TABLE v_comment(
 		v_no                          		NUMBER(10)		 NULL 
 );
 
+DROP SEQUENCE v_comment_c_no_SEQ;
+
+CREATE SEQUENCE v_comment_c_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE subscription(
 		u_id                          		VARCHAR2(100)		 NULL ,
@@ -51,15 +57,15 @@ CREATE TABLE view_history(
 
 ALTER TABLE userinfo ADD CONSTRAINT IDX_userinfo_PK PRIMARY KEY (u_id);
 
-ALTER TABLE upload_video ADD CONSTRAINT IDX_upload_video_PK PRIMARY KEY (v_no);
-ALTER TABLE upload_video ADD CONSTRAINT IDX_upload_video_FK0 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
+ALTER TABLE video ADD CONSTRAINT IDX_video_PK PRIMARY KEY (v_no);
+ALTER TABLE video ADD CONSTRAINT IDX_video_FK0 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
 
 ALTER TABLE v_comment ADD CONSTRAINT IDX_v_comment_PK PRIMARY KEY (c_no);
-ALTER TABLE v_comment ADD CONSTRAINT IDX_v_comment_FK0 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
-ALTER TABLE v_comment ADD CONSTRAINT IDX_v_comment_FK1 FOREIGN KEY (v_no) REFERENCES upload_video (v_no);
+ALTER TABLE v_comment ADD CONSTRAINT IDX_v_comment_FK0 FOREIGN KEY (v_no) REFERENCES video (v_no);
+ALTER TABLE v_comment ADD CONSTRAINT IDX_v_comment_FK1 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
 
 ALTER TABLE subscription ADD CONSTRAINT IDX_subscription_FK0 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
 
 ALTER TABLE view_history ADD CONSTRAINT IDX_view_history_FK0 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
-ALTER TABLE view_history ADD CONSTRAINT IDX_view_history_FK1 FOREIGN KEY (v_no) REFERENCES upload_video (v_no);
+ALTER TABLE view_history ADD CONSTRAINT IDX_view_history_FK1 FOREIGN KEY (v_no) REFERENCES video (v_no);
 
