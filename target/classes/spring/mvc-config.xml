@@ -10,10 +10,25 @@
 	<mvc:default-servlet-handler/>
 	<mvc:view-controller path="/" view-name="index"/>
 	<mvc:annotation-driven/>
-	<!-- 
-	<context:annotation-config/>
-	 -->
-	<context:component-scan base-package="com.geeg.youdeo.controller"/>	
+
+	<context:component-scan base-package="com.geeg.youdeo.controller"/>
+	
+	<mvc:resources mapping="/js/**" location="/js/" cache-period="0"/>
+	<mvc:resources mapping="/css/**" location="/css/" cache-period="0"/>
+	<mvc:resources mapping="/image/**" location="/image/" cache-period="0"/>	
+	
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/**"/>  
+	        <bean class="com.geeg.youdeo.controller.interceptor.AuthLoginAnnotationInterceptor" />
+	    </mvc:interceptor>
+	    <mvc:interceptor>
+          <mvc:mapping path="/**"/>
+          <bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+               <property name="cacheSeconds" value="0"/>
+          </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>

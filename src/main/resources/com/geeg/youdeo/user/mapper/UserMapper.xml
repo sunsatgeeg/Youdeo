@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.shop.user.mapper.UserMapper">
+
+	<insert id="create" parameterType="com.geeg.youdeo.user.User">
+		insert into userinfo(u_id, u_password, u_name, u_email, u_phone) 
+		values(#{u_id}, #{u_password}, #{u_name}, #{u_email}, #{u_phone})
+	</insert>
+	
+	<select id="findUser" parameterType="java.lang.String"
+		resultType="com.geeg.youdeo.user.User">
+		select * from userinfo
+		where u_id = #{u_id}
+	</select>
+	
+	<select id="findUserList" resultType="com.geeg.youdeo.user.User">
+		select * from userinfo
+	</select>
+	
+	<update id="update" parameterType="com.geeg.youdeo.user.User">
+		update userinfo
+		set u_password=#{u_password}, u_name=#{u_name}, u_email=#{u_email}
+		where u_id=#{u_id}
+	</update>
+	
+	<delete id="remove" parameterType="java.lang.String">
+		delete userinfo where
+		u_id=#{u_id}
+	</delete>
+	
+</mapper>
