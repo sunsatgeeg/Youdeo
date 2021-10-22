@@ -2,30 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geeg.youdeo.comment.mapper.CommentMapper">
 
-	<insert id="create" parameterType="com.geeg.youdeo.user.User">
-		insert into userinfo(u_id, u_password, u_name, u_email, u_phone) 
-		values(#{u_id}, #{u_password}, #{u_name}, #{u_email}, #{u_phone})
+	<insert id="create" parameterType="com.geeg.youdeo.comment.Comment">
+		insert into v_comment(c_no, c_content, u_id, v_no) 
+		values(v_comment_c_no_SEQ.nextval, #{c_content}, #{u_id}, #{v_no})
 	</insert>
-	
-	<select id="findUser" parameterType="java.lang.String"
-		resultType="com.geeg.youdeo.user.User">
-		select * from userinfo
-		where u_id = #{u_id}
+
+	<select id="findCommentList" parameterType="java.lang.String" resultType="com.geeg.youdeo.comment.Comment">
+		select * from v_comment where v_no = #{v_no}
 	</select>
 	
-	<select id="findUserList" resultType="com.geeg.youdeo.user.User">
-		select * from userinfo
-	</select>
-	
-	<update id="update" parameterType="com.geeg.youdeo.user.User">
-		update userinfo
-		set u_password=#{u_password}, u_name=#{u_name}, u_email=#{u_email}
-		where u_id=#{u_id}
+	<update id="update" parameterType="com.geeg.youdeo.comment.Comment">
+		update v_comment
+		set c_content = #{c_content}
+		where c_no=#{c_no}
 	</update>
 	
-	<delete id="remove" parameterType="java.lang.String">
-		delete userinfo where
-		u_id=#{u_id}
+	<delete id="remove" parameterType="java.lang.Integer">
+		delete v_comment where
+		c_no=#{c_no}
 	</delete>
 	
 </mapper>
