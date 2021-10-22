@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository("userDao")
 public class UserDaoMyBatisImpl implements UserDao {
-	public final static String NAMESPACE = "com.itwill.shop.user.mapper.UserMapper.";
+	public final static String NAMESPACE = "com.geeg.youdeo.user.mapper.UserMapper.";
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -21,6 +21,10 @@ public class UserDaoMyBatisImpl implements UserDao {
 	@Override
 	public int update(User user) throws Exception {
 		return sqlSession.update(NAMESPACE + "update", user);
+	}
+	@Override
+	public int updateVerified(User user) throws Exception {
+		return sqlSession.update(NAMESPACE + "updateVerified", user);
 	}
 
 	@Override

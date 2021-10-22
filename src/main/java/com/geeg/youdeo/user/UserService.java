@@ -23,6 +23,7 @@ public interface UserService {
 	 * 회원수정
 	 */
 	int update(User user) throws Exception;
+	int updateVerified(User user) throws Exception;
 	/*
 	 * 회원탈퇴
 	*/

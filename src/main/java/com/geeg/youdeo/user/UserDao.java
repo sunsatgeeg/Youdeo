@@ -13,6 +13,7 @@ public interface UserDao {
 	 * 기존의 사용자정보를 수정
 	 */
 	int update(User user) throws Exception;
+	int updateVerified(User user) throws Exception;
 
 	/*
 	 * 사용자아이디에해당하는 사용자를 삭제

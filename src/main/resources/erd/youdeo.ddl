@@ -9,7 +9,8 @@ CREATE TABLE userinfo(
 		u_password                    		VARCHAR2(100)		 NULL ,
 		u_name                        		VARCHAR2(100)		 NULL ,
 		u_email                       		VARCHAR2(100)		 NULL ,
-		u_phone                       		VARCHAR2(100)		 NULL 
+		u_phone                       		VARCHAR2(100)		 NULL ,
+		u_verified                    		NUMBER(10)		 DEFAULT 0		 NULL 
 );
 
 
@@ -41,18 +42,29 @@ DROP SEQUENCE v_comment_c_no_SEQ;
 
 CREATE SEQUENCE v_comment_c_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
 CREATE TABLE subscription(
+		s_no                          		NUMBER(10)		 NULL ,
 		u_id                          		VARCHAR2(100)		 NULL ,
-		s_id                          		VARCHAR2(100)		 NULL 
+		s_id                          		VARCHAR2(100)		 NULL ,
+		s_alram                       		NUMBER(10)		 DEFAULT 1		 NULL 
 );
+
+DROP SEQUENCE subscription_s_no_SEQ;
+
+CREATE SEQUENCE subscription_s_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 CREATE TABLE view_history(
+		vh_no                         		NUMBER(10)		 NULL ,
 		u_id                          		VARCHAR2(100)		 NULL ,
 		v_no                          		NUMBER(10)		 NULL ,
 		vh_date                       		DATE		 DEFAULT sysdate		 NULL 
 );
 
+DROP SEQUENCE view_history_vh_no_SEQ;
+
+CREATE SEQUENCE view_history_vh_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 ALTER TABLE userinfo ADD CONSTRAINT IDX_userinfo_PK PRIMARY KEY (u_id);
@@ -64,8 +76,10 @@ ALTER TABLE v_comment ADD CONSTRAINT IDX_v_comment_PK PRIMARY KEY (c_no);
 ALTER TABLE v_comment ADD CONSTRAINT IDX_v_comment_FK0 FOREIGN KEY (v_no) REFERENCES video (v_no);
 ALTER TABLE v_comment ADD CONSTRAINT IDX_v_comment_FK1 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
 
+ALTER TABLE subscription ADD CONSTRAINT IDX_subscription_PK PRIMARY KEY (s_no);
 ALTER TABLE subscription ADD CONSTRAINT IDX_subscription_FK0 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
 
+ALTER TABLE view_history ADD CONSTRAINT IDX_view_history_PK PRIMARY KEY (vh_no);
 ALTER TABLE view_history ADD CONSTRAINT IDX_view_history_FK0 FOREIGN KEY (u_id) REFERENCES userinfo (u_id);
 ALTER TABLE view_history ADD CONSTRAINT IDX_view_history_FK1 FOREIGN KEY (v_no) REFERENCES video (v_no);
 
