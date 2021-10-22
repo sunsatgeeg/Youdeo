@@ -20,11 +20,7 @@
 				<value>classpath:com/geeg/youdeo/video/mapper/VideoMapper.xml</value>
 				<value>classpath:com/geeg/youdeo/subscription/mapper/SubscriptionMapper.xml</value>
 				<value>classpath:com/geeg/youdeo/comment/mapper/CommentMapper.xml</value>
-				<!-- 
-				
-				
-				<value>classpath:com/geeg/youdeo/video_history/mapper/Video_historyMapper.xml</value>
-				 -->
+				<value>classpath:com/geeg/youdeo/view_history/mapper/View_historyMapper.xml</value>
 			</list>
 		</property>          
 	</bean>

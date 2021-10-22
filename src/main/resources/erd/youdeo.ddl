@@ -42,7 +42,6 @@ DROP SEQUENCE v_comment_c_no_SEQ;
 
 CREATE SEQUENCE v_comment_c_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
 CREATE TABLE subscription(
 		s_no                          		NUMBER(10)		 NULL ,
 		u_id                          		VARCHAR2(100)		 NULL ,
@@ -54,7 +53,6 @@ DROP SEQUENCE subscription_s_no_SEQ;
 
 CREATE SEQUENCE subscription_s_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
 CREATE TABLE view_history(
 		vh_no                         		NUMBER(10)		 NULL ,
 		u_id                          		VARCHAR2(100)		 NULL ,
@@ -65,7 +63,6 @@ CREATE TABLE view_history(
 DROP SEQUENCE view_history_vh_no_SEQ;
 
 CREATE SEQUENCE view_history_vh_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 ALTER TABLE userinfo ADD CONSTRAINT IDX_userinfo_PK PRIMARY KEY (u_id);
 
