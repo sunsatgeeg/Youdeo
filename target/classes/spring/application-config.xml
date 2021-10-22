@@ -11,8 +11,8 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
-	<bean  id="sqlSessionFactory" 
-			class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" 
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="mapperLocations">
 			<list>
@@ -24,9 +24,14 @@
 			</list>
 		</property>          
 	</bean>
+	
 	<bean id="sqlSession" 
 			class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
-
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    	<property name="basename" value="messages/messages"/>
+     </bean>
+     
 </beans>
