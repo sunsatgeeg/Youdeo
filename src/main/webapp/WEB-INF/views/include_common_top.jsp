@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
     
 <nav class="navbar navbar-expand navbar-light bg-white static-top osahan-nav sticky-top">
 	&nbsp;&nbsp; 
@@ -10,7 +11,7 @@
 	<!-- Navbar Search -->
 	<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-5 my-2 my-md-0 osahan-navbar-search">
 		<div class="input-group">
-		   	<input type="text" class="form-control" placeholder="Search for...">
+		   	<input type="text" class="form-control" placeholder="<s:message code="searchfor"/>">
 		   	<div class="input-group-append">
 		      	<button class="btn btn-light" type="button">
 		      	<i class="fas fa-search"></i> 
@@ -23,9 +24,10 @@
 	   	<li class="nav-item mx-1">
 	      	<a class="nav-link" href="upload">
 	      	<i class="fas fa-plus-circle fa-fw"></i>
-	      	Upload Video
+	      	<s:message code="uploadvideo"/>
 	      	</a>
 	   	</li>
+	   	<!-- 나중에 시간 남으면 기능 추가하기
 	   	<li class="nav-item dropdown no-arrow mx-1">
 		   <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		   <i class="fas fa-bell fa-fw"></i>
@@ -50,17 +52,18 @@
 				<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star "></i> &nbsp; Something else here</a>
 			</div>
 		</li>
+		 -->
 		<li class="nav-item dropdown no-arrow osahan-right-navbar-user">
 			<a class="nav-link dropdown-toggle user-dropdown-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<img alt="Avatar" src="img/user.png">
-			Osahan 
+			<!-- 사용자 이름 -->
+			geeg
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-				<a class="dropdown-item" href="account"><i class="fas fa-fw fa-user-circle"></i> &nbsp; My Account</a>
-				<a class="dropdown-item" href="subscriptions"><i class="fas fa-fw fa-video"></i> &nbsp; Subscriptions</a>
-				<a class="dropdown-item" href="settings"><i class="fas fa-fw fa-cog"></i> &nbsp; Settings</a>
+				<a class="dropdown-item" href="account"><i class="fas fa-fw fa-user-circle"></i> &nbsp; <s:message code="mychannel"/></a>
+				<a class="dropdown-item" href="settings"><i class="fas fa-fw fa-cog"></i> &nbsp; <s:message code="settings"/></a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-fw fa-sign-out-alt"></i> &nbsp; Logout</a>
+				<a class="dropdown-item" href="login"><i class="fas fa-fw fa-sign-out-alt"></i> &nbsp; <s:message code="logout"/></a>
 			</div>
 		</li>
 	</ul>

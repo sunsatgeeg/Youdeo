@@ -41,7 +41,7 @@
 		             	<div class="col-md-12">   
 		                	<form class="mobile-search">
 		                   		<div class="input-group">
-		                     		<input type="text" placeholder="Search for..." class="form-control">
+		                     		<input type="text" placeholder="<s:message code="searchfor"/>" class="form-control">
 		                       		<div class="input-group-append">
 		                         		<button type="button" class="btn btn-dark"><i class="fas fa-search"></i></button>
 		                       		</div>
@@ -64,7 +64,7 @@
 											<a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; <s:message code="sort.close"/></a>
 		                      		</div>
 		                   		</div>
-		                   	<h6><s:message code="index.subscriptionchannels"/></h6>
+		                   	<h6><s:message code="subscriptions"/></h6>
 	                	</div>
 					</div>
 	             	<div class="col-md-12">
@@ -209,10 +209,6 @@
 		<!-- Scroll to Top Button -->
 		<div id="scrollButton">
 			<jsp:include page="include_common_scroll_button.jsp"/>
-		</div>
-		<!-- Logout Modal -->
-		<div id="logoutModal">
-			<jsp:include page="include_common_logout_modal.jsp"/>
 		</div>
 		<!-- Bootstrap core JavaScript-->
 		<script src="vendor/jquery/jquery.min.js"></script>

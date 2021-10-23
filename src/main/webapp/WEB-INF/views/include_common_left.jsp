@@ -1,59 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+
 <ul class="sidebar navbar-nav">
-	<li class="nav-item active">
+	<li class="nav-item">
 		<a class="nav-link" href="index">
 		<i class="fas fa-fw fa-home"></i>
-		<span>Home</span>
+		<span><s:message code="home"/></span>
 		</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="channels">
 		<i class="fas fa-fw fa-users"></i>
-		<span>Channels</span>
+		<span><s:message code="subscribe"/></span>
 		</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="single_channel">
-		<i class="fas fa-fw fa-user-alt"></i>
-		<span>Single Channel</span>
-		</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="video_page">
-		<i class="fas fa-fw fa-video"></i>
-		<span>Video Page</span>
-		</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="upload_video">
-		<i class="fas fa-fw fa-cloud-upload-alt"></i>
-		<span>Upload Video</span>
-		</a>
-	</li>
-	<li class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		<i class="fas fa-fw fa-folder"></i>
-		<span>Pages</span>
-		</a>
-		<div class="dropdown-menu">
-			<h6 class="dropdown-header">Login Screens:</h6>
-			<a class="dropdown-item" href="login">Login</a>
-			<a class="dropdown-item" href="register">Register</a>
-			<a class="dropdown-item" href="forgot_password">Forgot Password</a>
-			<div class="dropdown-divider"></div>
-			<h6 class="dropdown-header">Other Pages:</h6>
-			<a class="dropdown-item" href="404">404 Page</a>
-			<a class="dropdown-item" href="blank">Blank Page</a>
-		</div>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="history_page">
 		<i class="fas fa-fw fa-history"></i>
-		<span>History Page</span>
+		<span><s:message code="viewhistory"/></span>
 		</a>
 	</li>
+
+	<!-- 나중에 기능 추가
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="categories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		<i class="fas fa-fw fa-list-alt"></i>
@@ -65,8 +34,9 @@
 			<a class="dropdown-item" href="categories">Television</a>
 		</div>
 	</li>
+	 -->
 	<li class="nav-item channel-sidebar-list">
-		<h6>SUBSCRIPTIONS</h6>
+		<h6><s:message code="subscriptions"/></h6>
 		<ul>
 			<li>
 				<a href="subscriptions">
@@ -75,19 +45,24 @@
 			</li>
 			<li>
 				<a href="subscriptions">
-				<img class="img-fluid" alt="" src="img/s2.png"> Unboxing  <span class="badge badge-warning">2</span>
-				</a>
-			</li>
-			<li>
-				<a href="subscriptions">
-				<img class="img-fluid" alt="" src="img/s3.png"> Product / Service  
-				</a>
-			</li>
-			<li>
-				<a href="subscriptions">
-				<img class="img-fluid" alt="" src="img/s4.png">  Gaming 
+				<img class="img-fluid" alt="" src="img/s2.png"> Unboxing  <!--<span class="badge badge-warning">2</span> -->
 				</a>
 			</li>
 		</ul>
 	</li>
 </ul>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script>
+$(function(){
+    var url = window.location.pathname,
+	urlRegExp = new RegExp(url.replace(/\/$/, '') + "$");  
+	console.log(urlRegExp);
+    $('a').each(function(){
+		if(urlRegExp.test(this.href.replace(/\/$/, ''))) {
+			
+            $(this).parent().addClass('active');
+        }
+    });
+});
+</script>

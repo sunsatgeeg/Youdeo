@@ -187,10 +187,7 @@
 	<div id="scrollButton">
 		<jsp:include page="include_common_scroll_button.jsp"/>
 	</div>
-	<!-- Logout Modal -->
-	<div id="logoutModal">
-		<jsp:include page="include_common_logout_modal.jsp"/>
-	</div>
+
       <!-- Bootstrap core JavaScript-->
       <script src="vendor/jquery/jquery.min.js"></script>
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
