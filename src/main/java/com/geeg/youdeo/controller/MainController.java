@@ -5,12 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
+
 	
-	@RequestMapping(value = "index")
-	public String index() {
-		return "index";
-	}
-	
+
 	@RequestMapping(value = "404")
 	public String error404() {
 		return "404";
@@ -44,11 +41,6 @@ public class MainController {
 	@RequestMapping(value = "history_page")
 	public String history_page() {
 		return "history_page";
-	}
-
-	@RequestMapping(value = "login")
-	public String login() {
-		return "login";
 	}
 
 	@RequestMapping(value = "register")
@@ -85,5 +77,7 @@ public class MainController {
 	public String video_page() {
 		return "video_page";
 	}
+	
+	
 	
 }

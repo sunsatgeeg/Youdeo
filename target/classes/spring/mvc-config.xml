@@ -22,6 +22,7 @@
 	        <mvc:mapping path="/**"/>  
 	        <bean class="com.geeg.youdeo.controller.interceptor.AuthLoginAnnotationInterceptor" />
 	    </mvc:interceptor>
+	    
 	    <mvc:interceptor>
           <mvc:mapping path="/**"/>
           <bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">

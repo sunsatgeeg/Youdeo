@@ -4,6 +4,22 @@ Author: Askbootstrap
 Author URI: https://themeforest.net/user/askbootstrap
 Version: 1.0
 */
+function login_action() {
+	if (document.f.u_id.value == "") {
+		alert("사용자 아이디를 입력하십시요.");
+		document.f.u_id.focus();
+		return false;
+	}
+	if (document.f.u_password.value == "") {
+		alert("비밀번호를 입력하십시요.");
+		document.f.u_password.focus();
+		return false;
+	}
+
+	document.f.action = "login_action";
+	document.f.submit();
+}
+
 (function($) {
   "use strict"; // Start of use strict
 
