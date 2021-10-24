@@ -27,7 +27,10 @@ public class IndexController {
 	public String index(HttpSession session, Model model) throws Exception {
 		String sUserId=(String)session.getAttribute("sUserId");
 		
-		if(sUserId != null) {
+		if(sUserId == null) {
+			List<Subscription> popularUserList = subscriptionService.findPopularUserList();
+			model.addAttribute("subList", popularUserList);
+		}else {
 			List<Subscription> subscriptionList = subscriptionService.findSubscriptionList(sUserId);
 			model.addAttribute("subList", subscriptionList);
 		}

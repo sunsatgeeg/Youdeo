@@ -9,7 +9,10 @@
 
 	<select id="findSubscriptionList" parameterType="java.lang.String" resultType="com.geeg.youdeo.subscription.Subscription">
 		select u_id, s_id, (select count(*) from subscription s1 where s1.s_id=s2.s_id) s_count from subscription s2 where u_id=#{u_id}
-		<!--  -->
+	</select>
+	
+	<select id="findPopularUserList" resultType="com.geeg.youdeo.subscription.Subscription">
+		select s_id, (select count(*) from subscription s1 where s1.s_id=s2.s_id) s_count from subscription s2 GROUP BY s_id order by s_count desc
 	</select>
 	
 	<update id="update" parameterType="com.geeg.youdeo.subscription.Subscription">

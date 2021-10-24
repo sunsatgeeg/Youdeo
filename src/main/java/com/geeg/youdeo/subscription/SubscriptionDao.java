@@ -12,7 +12,7 @@ public interface SubscriptionDao {
 	int remove(int s_no) throws Exception;
 
 	List<Subscription> findSubscriptionList(String u_id) throws Exception;
-
+	List<Subscription> findPopularUserList() throws Exception;
 
 	
 }
