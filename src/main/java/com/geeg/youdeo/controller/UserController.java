@@ -23,6 +23,11 @@ public class UserController {
 	public String login() {
 		return "login";
 	}
+	
+	@RequestMapping(value = "register")
+	public String register() {
+		return "register";
+	}
 
 	@PostMapping(value = "login_action")
 	public String login_action_post(@ModelAttribute User user, HttpSession session, Model model) throws Exception {
@@ -30,11 +35,11 @@ public class UserController {
 		
 		int result = userService.login(user.getU_id(), user.getU_password());
 		if(result == 0) {
-			model.addAttribute("msg1", "존재하지 않는 아이디입니다.");
+			model.addAttribute("errorcode", 0);
 			model.addAttribute("fuser", user);
 			forwardPath="login";
 		}else if(result == 1) {
-			model.addAttribute("msg2", "잘못된 비밀번호입니다. 다시 시도하세요.");
+			model.addAttribute("errorcode", 1);
 			model.addAttribute("fuser", user);
 			forwardPath="login";
 		}else if(result == 2) {
@@ -50,13 +55,32 @@ public class UserController {
 		return "redirect:index";
 	}
 	
-	@LoginCheck
 	@RequestMapping(value = "logout_action")
 	public String logout_action(HttpSession session) {
 		session.invalidate();
 		return "redirect:index";
 	}
 	
+	@PostMapping(value = "register_action")
+	public String register_action(@ModelAttribute User user, HttpSession session, Model model) throws Exception{
+		String forwardPath = "";
+		
+		int result = userService.create(user);
+		if(result == -1) {
+			model.addAttribute("msg1", "사용할 수 없는 아이디입니다.");
+			model.addAttribute("fuser",user);
+			forwardPath = "register";
+		}else {
+			forwardPath = "login";
+		}
+		
+		return forwardPath;
+	}
+	
+	@GetMapping(value = "register_action")
+	public String register_action() {
+		return "redirect:register";
+	}
 	
 	
 }

@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 		// 1. 아이디 존재여부
 		User user = userDao.findUser(userId);
 		if(user==null) {
-			// 아이디 존재 암함
+			// 아이디 존재 안함
 			result = 0;
 		}else {
 			// 아이디 존재 함

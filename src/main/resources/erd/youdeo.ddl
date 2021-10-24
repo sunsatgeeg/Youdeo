@@ -8,6 +8,7 @@ CREATE TABLE userinfo(
 		u_id                          		VARCHAR2(100)		 NULL ,
 		u_password                    		VARCHAR2(100)		 NULL ,
 		u_name                        		VARCHAR2(100)		 NULL ,
+		u_birthday                    		DATE		 NULL ,
 		u_email                       		VARCHAR2(100)		 NULL ,
 		u_phone                       		VARCHAR2(100)		 NULL ,
 		u_verified                    		NUMBER(10)		 DEFAULT 0		 NULL 

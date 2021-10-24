@@ -34,20 +34,17 @@
                         <p>It is a long established fact that a reader <br> will be distracted by the readable.</p>
                      </div>
                      
-                   	<c:if test="${!empty(msg1) || !empty(msg2)}">
-						<div class="alert alert-danger" role="alert">
-						  ${msg1}${msg2}
-						</div>
-					</c:if>
-                     
-                     <form name ="f" method="post">
+					<div id="login_msg" class="alert alert-danger" role="alert" style="display:none">
+					</div>
+					
+                     <form name ="f">
                         <div class="form-group">
                            <label>Id</label>
-                           <input type="text" name="u_id" class="form-control ${msg1}" value="${fuser.u_id}">
+                           <input type="text" name="u_id" id="u_id" class="form-control" value="${fuser.u_id}">
                         </div>
                         <div class="form-group">
                            <label>Password</label>
-                           <input type="password" name="u_password" class="form-control ${msg2}" value="${fuser.u_password}">
+                           <input type="password" name="u_password" id="u_password" class="form-control" value="${fuser.u_password}">
                         </div>
                         <div class="mt-4">
                            <div class="row">
@@ -100,6 +97,27 @@
       <!-- Owl Carousel -->
       <script src="vendor/owl-carousel/owl.carousel.js"></script>
       <!-- Custom scripts for all pages-->
-      <script src="js/custom.js"></script>      
+      <script src="js/custom.js"></script>
+      <script type="text/javascript">
+		$(function(){
+			if(${empty(errorcode)}){
+				return;
+			} else{
+				var errorcode = ${errorcode};
+				
+				$('#login_msg').toggle('hide');
+				
+				if(errorcode == 0){
+					$('#login_msg').text('존재하지 않는 아이디입니다.');
+					$('#u_id').addClass('is-invalid');
+				}
+				if(errorcode == 1){
+					$('#login_msg').text('잘못된 비밀번호입니다. 다시 시도하세요.');
+					$('#u_password').addClass('is-invalid');
+				}
+			}
+		});
+      </script>
+      
    </body>
 </html>

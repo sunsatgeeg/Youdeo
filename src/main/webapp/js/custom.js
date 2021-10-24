@@ -17,6 +17,7 @@ function login_action() {
 	}
 
 	document.f.action = "login_action";
+	document.f.method = 'POST';
 	document.f.submit();
 }
 

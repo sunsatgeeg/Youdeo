@@ -43,10 +43,6 @@ public class MainController {
 		return "history_page";
 	}
 
-	@RequestMapping(value = "register")
-	public String register() {
-		return "register";
-	}
 
 	@RequestMapping(value = "settings")
 	public String settings() {

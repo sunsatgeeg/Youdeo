@@ -3,3 +3,5 @@ select u_id, s_id, (select count(*) from subscription s1 where s1.s_id=s2.s_id) 
 select u_id,s_id from subscription;
 
 select * from video;
+
+commit;
