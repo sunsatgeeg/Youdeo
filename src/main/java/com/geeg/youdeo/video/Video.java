@@ -9,6 +9,7 @@ public class Video {
 	private String v_title;
 	private String v_description;
 	private String v_date;
+	private int v_time;
 	private String v_category;
 	private int v_views;
 	private int v_good;
@@ -17,20 +18,6 @@ public class Video {
 
 	public Video() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Video(int v_no, String v_title, String v_description, String v_date, String v_category, int v_views,
-			int v_good, int v_bad, User user) {
-		super();
-		this.v_no = v_no;
-		this.v_title = v_title;
-		this.v_description = v_description;
-		this.v_date = v_date;
-		this.v_category = v_category;
-		this.v_views = v_views;
-		this.v_good = v_good;
-		this.v_bad = v_bad;
-		this.user = user;
 	}
 
 	public int getV_no() {
@@ -63,6 +50,14 @@ public class Video {
 
 	public void setV_date(String v_date) {
 		this.v_date = v_date;
+	}
+
+	public int getV_time() {
+		return v_time;
+	}
+
+	public void setV_time(int v_time) {
+		this.v_time = v_time;
 	}
 
 	public String getV_category() {
@@ -105,11 +100,28 @@ public class Video {
 		this.user = user;
 	}
 
+	public Video(int v_no, String v_title, String v_description, String v_date, int v_time, String v_category,
+			int v_views, int v_good, int v_bad, User user) {
+		super();
+		this.v_no = v_no;
+		this.v_title = v_title;
+		this.v_description = v_description;
+		this.v_date = v_date;
+		this.v_time = v_time;
+		this.v_category = v_category;
+		this.v_views = v_views;
+		this.v_good = v_good;
+		this.v_bad = v_bad;
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Video [v_no=" + v_no + ", v_title=" + v_title + ", v_description=" + v_description + ", v_date="
-				+ v_date + ", v_category=" + v_category + ", v_views=" + v_views + ", v_good=" + v_good + ", v_bad="
-				+ v_bad + ", user=" + user + "]";
+				+ v_date + ", v_time=" + v_time + ", v_category=" + v_category + ", v_views=" + v_views + ", v_good="
+				+ v_good + ", v_bad=" + v_bad + ", user=" + user + "]";
 	}
 
+	
+	
 }

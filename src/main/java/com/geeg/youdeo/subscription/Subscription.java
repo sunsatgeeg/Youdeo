@@ -7,17 +7,19 @@ public class Subscription {
 	private User user;
 	private String s_id;
 	private int s_alram;
+	private int s_count;
 
 	public Subscription() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Subscription(int s_no, User user, String s_id, int s_alram) {
+	public Subscription(int s_no, User user, String s_id, int s_alram, int s_count) {
 		super();
 		this.s_no = s_no;
 		this.user = user;
 		this.s_id = s_id;
 		this.s_alram = s_alram;
+		this.s_count = s_count;
 	}
 
 	public int getS_no() {
@@ -52,9 +54,18 @@ public class Subscription {
 		this.s_alram = s_alram;
 	}
 
+	public int getS_count() {
+		return s_count;
+	}
+
+	public void setS_count(int s_count) {
+		this.s_count = s_count;
+	}
+
 	@Override
 	public String toString() {
-		return "Subscription [s_no=" + s_no + ", user=" + user + ", s_id=" + s_id + ", s_alram=" + s_alram + "]";
+		return "Subscription [s_no=" + s_no + ", user=" + user + ", s_id=" + s_id + ", s_alram=" + s_alram
+				+ ", s_count=" + s_count + "]";
 	}
 
 }

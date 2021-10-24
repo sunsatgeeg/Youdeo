@@ -17,10 +17,14 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public List<Video> findVideoList(String v_title) throws Exception {
-		return videoDao.findVideoList(v_title);
+	public List<Video> searchVideoList(String v_title) throws Exception {
+		return videoDao.searchVideoList(v_title);
 	}
 
+	public List<Video> findVideoList() throws Exception {
+		return videoDao.findVideoList();
+	}
+	
 	@Override
 	public Video findVideo(int v_no) throws Exception {
 		return videoDao.findVideo(v_no);

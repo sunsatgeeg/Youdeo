@@ -27,9 +27,9 @@ public class VideoDaoTestMain {
 		
 		System.out.println("\t2. findVideo --> " + videoDao.findVideo(1));
 
-		System.out.println("\t3. findVideoList --> " + videoDao.findVideoList("1"));
+		System.out.println("\t3. searchVideoList --> " + videoDao.searchVideoList("1"));
 		
-		System.out.println("\t4. updateVideo -- > " + videoDao.update(new Video(5, "수정1제목", "수정내용", null, "판타지", 0, 0, 0, null)));
+		System.out.println("\t4. updateVideo -- > " + videoDao.update(new Video(5, "수정1제목", "수정내용", null, 0, "판타지", 0, 0, 0, null)));
 		
 		System.out.println("\t5. removeVideo --> " + videoDao.remove(6));
 		

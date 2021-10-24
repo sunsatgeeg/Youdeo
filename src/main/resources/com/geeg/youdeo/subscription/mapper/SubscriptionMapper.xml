@@ -8,7 +8,8 @@
 	</insert>
 
 	<select id="findSubscriptionList" parameterType="java.lang.String" resultType="com.geeg.youdeo.subscription.Subscription">
-		select * from subscription where u_id = #{u_id}
+		select u_id, s_id, (select count(*) from subscription s1 where s1.s_id=s2.s_id) s_count from subscription s2 where u_id=#{u_id}
+		<!--  -->
 	</select>
 	
 	<update id="update" parameterType="com.geeg.youdeo.subscription.Subscription">

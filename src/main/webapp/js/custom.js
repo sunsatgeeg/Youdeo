@@ -20,6 +20,16 @@ function login_action() {
 	document.f.submit();
 }
 
+$(function(){
+    var url = window.location.pathname,
+	urlRegExp = new RegExp(url.replace(/\/$/, '') + "$");  
+    $('a').each(function(){
+		if(urlRegExp.test(this.href.replace(/\/$/, ''))) {
+            $(this).parent().addClass('active');
+        }
+    });
+});
+
 (function($) {
   "use strict"; // Start of use strict
 

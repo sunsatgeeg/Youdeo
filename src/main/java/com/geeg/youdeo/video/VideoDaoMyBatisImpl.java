@@ -19,7 +19,6 @@ public class VideoDaoMyBatisImpl implements VideoDao {
 		return sqlSession.insert(NAMESPACE + "create", map);
 	}
 
-	
 	@Override
 	public int update(Video video) throws Exception {
 		return sqlSession.update(NAMESPACE + "update", video);
@@ -36,8 +35,12 @@ public class VideoDaoMyBatisImpl implements VideoDao {
 	}
 
 	@Override
-	public List<Video> findVideoList(String v_title) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "findVideoList", v_title);
+	public List<Video> searchVideoList(String v_title) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "searchVideoList", v_title);
+	}
+	
+	public List<Video> findVideoList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "findVideoList");
 	}
 
 

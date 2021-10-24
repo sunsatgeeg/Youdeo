@@ -13,9 +13,13 @@
 		where v_no = #{v_no}
 	</select>
 	
-	<select id="findVideoList" parameterType="java.lang.String" resultType="com.geeg.youdeo.video.Video">
+	<select id="searchVideoList" parameterType="java.lang.String" resultType="com.geeg.youdeo.video.Video">
 		select * from video
 		where v_title LIKE '%'||#{v_title}||'%'
+	</select>
+	
+	<select id="findVideoList" resultType="com.geeg.youdeo.video.Video">
+		select * from video
 	</select>
 	
 	<update id="update" parameterType="com.geeg.youdeo.video.Video">

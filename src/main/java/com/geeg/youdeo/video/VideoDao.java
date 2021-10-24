@@ -13,8 +13,9 @@ public interface VideoDao {
 
 	Video findVideo(int v_no) throws Exception;
 
-	List<Video> findVideoList(String v_title) throws Exception;
+	List<Video> searchVideoList(String v_title) throws Exception;
 
+	List<Video> findVideoList() throws Exception;
 
 	
 

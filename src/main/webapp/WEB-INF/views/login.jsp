@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
    <head>
@@ -32,14 +33,21 @@
                         <h5 class="mt-3 mb-3">Welcome to Vidoe</h5>
                         <p>It is a long established fact that a reader <br> will be distracted by the readable.</p>
                      </div>
+                     
+                   	<c:if test="${!empty(msg1) || !empty(msg2)}">
+						<div class="alert alert-danger" role="alert">
+						  ${msg1}${msg2}
+						</div>
+					</c:if>
+                     
                      <form name ="f" method="post">
                         <div class="form-group">
-                           <label>Mobile number</label>
-                           <input type="text" name="u_id" class="form-control" placeholder="Enter mobile number">
+                           <label>Id</label>
+                           <input type="text" name="u_id" class="form-control ${msg1}" value="${fuser.u_id}">
                         </div>
                         <div class="form-group">
                            <label>Password</label>
-                           <input type="password" name="u_password" class="form-control" placeholder="Password">
+                           <input type="password" name="u_password" class="form-control ${msg2}" value="${fuser.u_password}">
                         </div>
                         <div class="mt-4">
                            <div class="row">
@@ -92,6 +100,6 @@
       <!-- Owl Carousel -->
       <script src="vendor/owl-carousel/owl.carousel.js"></script>
       <!-- Custom scripts for all pages-->
-      <script src="js/custom.js"></script>
+      <script src="js/custom.js"></script>      
    </body>
 </html>

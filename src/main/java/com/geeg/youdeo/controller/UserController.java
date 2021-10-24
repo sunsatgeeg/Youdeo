@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.geeg.youdeo.controller.interceptor.LoginCheck;
 import com.geeg.youdeo.user.User;
 import com.geeg.youdeo.user.UserService;
 
@@ -29,11 +30,11 @@ public class UserController {
 		
 		int result = userService.login(user.getU_id(), user.getU_password());
 		if(result == 0) {
-			model.addAttribute("msg1", user.getU_id()+"는 존재하지 않는 아이디입니다.");
+			model.addAttribute("msg1", "존재하지 않는 아이디입니다.");
 			model.addAttribute("fuser", user);
 			forwardPath="login";
 		}else if(result == 1) {
-			model.addAttribute("msg2", "패스워드가 일치하지 않습니다.");
+			model.addAttribute("msg2", "잘못된 비밀번호입니다. 다시 시도하세요.");
 			model.addAttribute("fuser", user);
 			forwardPath="login";
 		}else if(result == 2) {
@@ -48,6 +49,14 @@ public class UserController {
 	public String login_action_get() {
 		return "redirect:index";
 	}
+	
+	@LoginCheck
+	@RequestMapping(value = "logout_action")
+	public String logout_action(HttpSession session) {
+		session.invalidate();
+		return "redirect:index";
+	}
+	
 	
 	
 }

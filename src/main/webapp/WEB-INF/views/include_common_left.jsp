@@ -51,18 +51,3 @@
 		</ul>
 	</li>
 </ul>
-
-<script src="vendor/jquery/jquery.min.js"></script>
-<script>
-$(function(){
-    var url = window.location.pathname,
-	urlRegExp = new RegExp(url.replace(/\/$/, '') + "$");  
-	console.log(urlRegExp);
-    $('a').each(function(){
-		if(urlRegExp.test(this.href.replace(/\/$/, ''))) {
-			
-            $(this).parent().addClass('active');
-        }
-    });
-});
-</script>

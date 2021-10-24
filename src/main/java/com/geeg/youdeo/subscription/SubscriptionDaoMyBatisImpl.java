@@ -34,5 +34,4 @@ public class SubscriptionDaoMyBatisImpl implements SubscriptionDao {
 		return sqlSession.selectList(NAMESPACE + "findSubscriptionList", u_id);
 	}
 
-
 }

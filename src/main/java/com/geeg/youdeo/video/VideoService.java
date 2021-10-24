@@ -7,7 +7,7 @@ public interface VideoService {
 
 	int create(Map map) throws Exception;
 
-	List<Video> findVideoList(String v_title) throws Exception;
+	List<Video> searchVideoList(String v_title) throws Exception;
 
 	Video findVideo(int v_no) throws Exception;
 
@@ -15,4 +15,5 @@ public interface VideoService {
 
 	int remove(int v_no) throws Exception;
 
+	List<Video> findVideoList() throws Exception;
 }

@@ -22,50 +22,32 @@
 	</form>
 	<!-- Navbar -->
 	<ul class="navbar-nav ml-auto ml-md-0 osahan-right-navbar">
-	   	<li class="nav-item mx-1">
-	      	<a class="nav-link" href="upload">
-	      	<i class="fas fa-plus-circle fa-fw"></i>
-	      	<s:message code="uploadvideo"/>
-	      	</a>
-	   	</li>
-	   	<!-- 나중에 시간 남으면 기능 추가하기
-	   	<li class="nav-item dropdown no-arrow mx-1">
-		   <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		   <i class="fas fa-bell fa-fw"></i>
-		   <span class="badge badge-danger">9+</span>
-		   </a>
-		   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-		      	<a class="dropdown-item" href="#"><i class="fas fa-fw fa-edit "></i> &nbsp; Action</a>
-		      	<a class="dropdown-item" href="#"><i class="fas fa-fw fa-headphones-alt "></i> &nbsp; Another action</a>
-		      	<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star "></i> &nbsp; Something else here</a>
-			</div>
-		</li>
-		<li class="nav-item dropdown no-arrow mx-1">
-			<a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<i class="fas fa-envelope fa-fw"></i>
-			<span class="badge badge-success">7</span>
-			</a>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-				<a class="dropdown-item" href="#"><i class="fas fa-fw fa-edit "></i> &nbsp; Action</a>
-				<a class="dropdown-item" href="#"><i class="fas fa-fw fa-headphones-alt "></i> &nbsp; Another action</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star "></i> &nbsp; Something else here</a>
-			</div>
-		</li>
-		 -->
-		<li class="nav-item dropdown no-arrow osahan-right-navbar-user">
-			<a class="nav-link dropdown-toggle user-dropdown-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<img alt="Avatar" src="img/user.png">
-			<!-- 사용자 이름 -->
-			${sUserId}
-			</a>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-				<a class="dropdown-item" href="account"><i class="fas fa-fw fa-user-circle"></i> &nbsp; <s:message code="mychannel"/></a>
-				<a class="dropdown-item" href="settings"><i class="fas fa-fw fa-cog"></i> &nbsp; <s:message code="settings"/></a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="login"><i class="fas fa-fw fa-sign-out-alt"></i> &nbsp; <s:message code="logout"/></a>
-			</div>
-		</li>
+ 		<c:choose>
+			<c:when test="${empty(sUserId)}">
+				<div class="mb-auto mt-auto">
+					<button class="btn btn-outline-primary btn-lg" onclick="location.href='login'">로그인</button>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<li class="nav-item mx-1">
+			      	<a class="nav-link" href="upload">
+			      	<i class="fas fa-plus-circle fa-fw"></i>
+			      	<s:message code="uploadvideo"/>
+			      	</a>
+			   	</li>
+				<li class="nav-item dropdown no-arrow osahan-right-navbar-user">
+					<a class="nav-link dropdown-toggle user-dropdown-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<img alt="Avatar" src="img/user.png">
+					${sUserId}
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+						<a class="dropdown-item" href="account"><i class="fas fa-fw fa-user-circle"></i> &nbsp; <s:message code="mychannel"/></a>
+						<a class="dropdown-item" href="settings"><i class="fas fa-fw fa-cog"></i> &nbsp; <s:message code="settings"/></a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="logout_action"><i class="fas fa-fw fa-sign-out-alt"></i> &nbsp; <s:message code="logout"/></a>
+					</div>
+				</li>
+			</c:otherwise>
+ 		</c:choose>
 	</ul>
 </nav>
