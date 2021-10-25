@@ -1,5 +1,7 @@
 package com.geeg.youdeo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +11,37 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geeg.youdeo.controller.interceptor.LoginCheck;
 import com.geeg.youdeo.user.User;
 import com.geeg.youdeo.user.UserService;
+import com.geeg.youdeo.video.Video;
+import com.geeg.youdeo.video.VideoService;
 
 @Controller
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private VideoService videoService;
+		
+	
+	@RequestMapping(value = "user", params ="!u_id")
+	public String watch() throws Exception {
+		return "404";
+	}
+	
+	@RequestMapping(value = "user", params ="u_id")
+	public String user(@RequestParam String u_id, Model model) throws Exception{
+		User user = userService.findUser(u_id);
+		List<Video> videoList = videoService.findChannelVideoList(u_id);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("videoList", videoList);
+		
+		return "user";
+	}
 	
 	@RequestMapping(value = "login")
 	public String login() {

@@ -5,4 +5,9 @@ select u_id,s_id from subscription;
 
 select * from video;
 
+select * from video v
+join userinfo u
+on v.u_id=u.u_id
+where v_no = 1;
+
 commit;

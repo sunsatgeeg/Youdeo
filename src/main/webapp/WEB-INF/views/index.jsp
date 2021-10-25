@@ -114,7 +114,7 @@
 								<div class="col-xl-3 col-sm-6 mb-3">
 				                	<div class="video-card">
 				                   		<div class="video-card-image">
-				                      		<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a>
+				                      		<a class="play-icon" href="watch?v_no=${video.v_no}"><i class="fas fa-play-circle"></i></a>
 				                      		<a href="#"><img class="img-fluid" src="img/v1.png" alt=""></a>
 				                      		<div class="time">${video.v_time}</div>
 				                   		</div>

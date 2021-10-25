@@ -39,6 +39,11 @@ public class VideoDaoMyBatisImpl implements VideoDao {
 		return sqlSession.selectList(NAMESPACE + "searchVideoList", v_title);
 	}
 	
+	@Override
+	public List<Video> findChannelVideoList(String u_id) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "findChannelVideoList", u_id);
+	}
+	
 	public List<Video> findVideoList() throws Exception {
 		return sqlSession.selectList(NAMESPACE + "findVideoList");
 	}

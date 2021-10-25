@@ -49,10 +49,7 @@ public class MainController {
 		return "settings";
 	}
 
-	@RequestMapping(value = "single_channel")
-	public String single_channel() {
-		return "single_channel";
-	}
+
 
 	@RequestMapping(value = "subscriptions")
 	public String subscriptions() {
@@ -69,10 +66,7 @@ public class MainController {
 		return "upload";
 	}
 
-	@RequestMapping(value = "video_page")
-	public String video_page() {
-		return "video_page";
-	}
+
 	
 	
 	

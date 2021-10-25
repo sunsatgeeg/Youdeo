@@ -12,7 +12,7 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/u_id_duplicate_check_rest",produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "/u_id_duplicate_check_rest", produces = "text/plain;charset=UTF-8")
 	public String u_id_duplicate_check(@RequestParam String u_id) throws Exception{
 		boolean isDuplicate= userService.isDuplcateUserId(u_id);
 		return !isDuplicate+"";

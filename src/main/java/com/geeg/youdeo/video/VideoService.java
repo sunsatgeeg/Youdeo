@@ -9,6 +9,8 @@ public interface VideoService {
 
 	List<Video> searchVideoList(String v_title) throws Exception;
 
+	List<Video> findChannelVideoList(String u_id) throws Exception;
+	
 	Video findVideo(int v_no) throws Exception;
 
 	int update(Video video) throws Exception;

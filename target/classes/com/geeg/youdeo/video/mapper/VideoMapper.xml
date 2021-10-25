@@ -2,20 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geeg.youdeo.video.mapper.VideoMapper">
 
+	<resultMap type="com.geeg.youdeo.video.Video" id="VideoUserResultMap" autoMapping="false">
+		<result column="V_NO" property="v_no"/>
+		<result column="V_TITLE" property="v_title"/>
+		<result column="V_DESCRIPTION" property="v_description"/>
+		<result column="V_DATE" property="v_date"/>
+		<result column="V_TIME" property="v_time"/>
+		<result column="V_CATEGORY" property="v_category"/>
+		<result column="V_VIEWS" property="v_views"/>
+		<result column="V_GOOD" property="v_good"/>
+		<result column="V_BAD" property="v_bad"/>
+		<association property="user" javaType="com.geeg.youdeo.user.User" autoMapping="false">
+			<result column="U_ID" property="u_id"/>
+			<result column="U_NAME" property="u_name"/>
+			<result column="U_VERIFIED" property="u_verified"/> 
+		</association>
+	</resultMap>
+
 	<insert id="create" parameterType="java.util.Map">
 		insert into video(v_no, v_title, v_description, v_category, u_id) 
 		values(video_v_no_SEQ.nextval, #{v_title}, #{v_description}, #{v_category}, #{u_id})
 	</insert>
 	 
-	<select id="findVideo" parameterType="java.lang.Integer"
-		resultType="com.geeg.youdeo.video.Video">
-		select * from video
+	<select id="findVideo" parameterType="java.lang.Integer" resultMap="VideoUserResultMap">
+		select * from video v
+		join userinfo u
+		on v.u_id=u.u_id
 		where v_no = #{v_no}
 	</select>
 	
 	<select id="searchVideoList" parameterType="java.lang.String" resultType="com.geeg.youdeo.video.Video">
 		select * from video
 		where v_title LIKE '%'||#{v_title}||'%'
+	</select>
+	
+	<select id="findChannelVideoList" parameterType="java.lang.String" resultType="com.geeg.youdeo.video.Video">
+		select * from video
+		where u_id = #{u_id}
 	</select>
 	
 	<select id="findVideoList" resultType="com.geeg.youdeo.video.Video">

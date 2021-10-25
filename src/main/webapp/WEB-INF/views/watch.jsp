@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
    <head>
@@ -42,13 +43,13 @@
                               <iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/8LWZSGNjuF0?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                            </div>
                            <div class="single-video-title box mb-3">
-                              <h2><a href="#">Contrary to popular belief, Lorem Ipsum (2019) is not.</a></h2>
-                              <p class="mb-0"><i class="fas fa-eye"></i> 2,729,347 views</p>
+                              <h2>${video.v_title }</h2>
+                              <p class="mb-0"><i class="fas fa-eye"></i> ${video.v_views } views</p>
                            </div>
                            <div class="single-video-author box mb-3">
                               <div class="float-right"><button class="btn btn-danger" type="button">Subscribe <strong>1.4M</strong></button> <button class="btn btn btn-outline-danger" type="button"><i class="fas fa-bell"></i></button></div>
-                              <img class="img-fluid" src="img/s4.png" alt="">
-                              <p><a href="#"><strong>Osahan Channel</strong></a> <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></span></p>
+                              <a href="user?u_id=${video.user.u_id}"><img class="img-fluid" src="img/s4.png" alt=""></a>
+                              <p><a href="user?u_id=${video.user.u_id}"><strong>${video.user.u_name }</strong></a> <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></span></p>
                               <small>Published on Aug 10, 2018</small>
                            </div>
                            <div class="single-video-info-content box mb-3">

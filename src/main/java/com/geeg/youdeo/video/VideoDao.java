@@ -17,6 +17,6 @@ public interface VideoDao {
 
 	List<Video> findVideoList() throws Exception;
 
-	
+	List<Video> findChannelVideoList(String u_id) throws Exception;
 
 }
