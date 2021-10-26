@@ -49,7 +49,7 @@
             </div>
             <div class="single-channel-nav">
                <nav class="navbar navbar-expand-lg navbar-light">
-                  <a class="channel-brand" href="#">${user.u_id} <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></span></a>
+                  <a class="channel-brand" href="#">${user.u_name} <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></span></a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                   </button>

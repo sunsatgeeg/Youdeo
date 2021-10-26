@@ -8,9 +8,10 @@ CREATE TABLE userinfo(
 		u_id                          		VARCHAR2(100)		 NULL ,
 		u_password                    		VARCHAR2(100)		 NULL ,
 		u_name                        		VARCHAR2(100)		 NULL ,
-		u_birthday                    		DATE		 NULL ,
 		u_email                       		VARCHAR2(100)		 NULL ,
 		u_phone                       		VARCHAR2(100)		 NULL ,
+		u_profileimg                  		VARCHAR2(100)		 DEFAULT 'none.png'		 NULL ,
+		u_bannerimg                   		VARCHAR2(100)		 DEFAULT 'none_b.png'		 NULL ,
 		u_verified                    		NUMBER(10)		 DEFAULT 0		 NULL 
 );
 
@@ -31,7 +32,6 @@ CREATE TABLE video(
 DROP SEQUENCE video_v_no_SEQ;
 
 CREATE SEQUENCE video_v_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 CREATE TABLE v_comment(
 		c_no                          		NUMBER(10)		 NULL ,
@@ -56,7 +56,6 @@ CREATE TABLE subscription(
 DROP SEQUENCE subscription_s_no_SEQ;
 
 CREATE SEQUENCE subscription_s_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 CREATE TABLE view_history(
 		vh_no                         		NUMBER(10)		 NULL ,

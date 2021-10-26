@@ -20,6 +20,74 @@ Version: 1.0
 	-- Footer
 */
 /* Body */
+/* Twitch CSS*/
+.irkKdr {
+    display: flex !important;
+    flex-direction: row !important;
+}
+.SpXOZ {
+    margin-right: 2rem !important;
+    position: relative !important;
+}
+.gNHAJv {
+    position: relative;
+    background-color: inherit;
+    width: 9.6rem;
+    height: 9.6rem;
+}
+.gNHAJv .thum {
+    position: absolute;
+    left: 20px;    
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    font: 0/0 a;
+}
+.SpXOQ {
+    margin-right: 7rem !important;
+    position: relative !important;
+}
+.gNHAJq {
+    position: relative;
+    background-color: inherit;
+    width: 9.6rem;
+    height: 8.6rem;
+}
+.gNHAJq .thum {
+    position: absolute;
+    left: 20px;    
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 192px;
+    height: 108px;
+    font: 0/0 a;
+}
+.bPViAU {
+    -webkit-box-flex: 1 !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    -webkit-box-pack: center !important;
+    justify-content: center !important;
+}
+.profile-image-setting__input {
+    display: none;
+}
+.jLsLts {
+    display: flex !important;
+}
+.fSetzA {
+    background-color: var(--color-background-button-secondary-default);
+    color: var(--color-text-button-secondary);
+}
+
+
+
+
  html {
      position: relative;
      min-height: 100%;

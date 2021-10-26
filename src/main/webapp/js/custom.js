@@ -4,6 +4,8 @@ Author: Askbootstrap
 Author URI: https://themeforest.net/user/askbootstrap
 Version: 1.0
 */
+
+// 로그인
 function login_action() {
 	if (document.f.u_id.value == "") {
 		alert("사용자 아이디를 입력하십시요.");
@@ -16,9 +18,9 @@ function login_action() {
 		return false;
 	}
 
-	document.f.action = "login_action";
-	document.f.method = 'POST';
-	document.f.submit();
+	f.action = "login_action";
+	f.method = 'POST';
+	f.submit();
 }
 
 $(function(){

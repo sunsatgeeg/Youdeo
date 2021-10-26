@@ -23,7 +23,7 @@ public class IndexController {
 	@Autowired
 	private VideoService videoService;
 	
-	@RequestMapping(value = "index")
+	@RequestMapping(value = {"index","/"})
 	public String index(HttpSession session, Model model) throws Exception {
 		String sUserId=(String)session.getAttribute("sUserId");
 		

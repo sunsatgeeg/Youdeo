@@ -1,7 +1,10 @@
 package com.geeg.youdeo.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.geeg.youdeo.controller.interceptor.LoginCheck;
 import com.geeg.youdeo.user.User;
@@ -25,11 +30,13 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private VideoService videoService;
+	
+	private String path="C:\\spring_server\\img";
 		
 	
 	@RequestMapping(value = "user", params ="!u_id")
 	public String watch() throws Exception {
-		return "404";
+		return "redirect:404";
 	}
 	
 	@RequestMapping(value = "user", params ="u_id")
@@ -68,6 +75,7 @@ public class UserController {
 			forwardPath="login";
 		}else if(result == 2) {
 			session.setAttribute("sUserId", user.getU_id());
+			session.setAttribute("sUserImage", userService.findUser(user.getU_id()).getU_profileimg());
 			forwardPath = "redirect:index";
 		}
 		
@@ -107,5 +115,25 @@ public class UserController {
 		return "redirect:register";
 	}
 	
+	@LoginCheck
+	@RequestMapping(value = "settings")
+	public String settings(HttpSession session, Model model) throws Exception {
+		String sUserId = (String)session.getAttribute("sUserId");
+		
+		User user = userService.findUser(sUserId);
+		
+		model.addAttribute("user", user);
+		
+		return "settings";
+	}
 	
+	@GetMapping(value = "profile_image_upload_action")
+	public String profile_image_upload_action() {
+		return "redirect:404";
+	}
+	
+	@GetMapping(value = "banner_image_upload_action")
+	public String banner_image_upload_action() {
+		return "redirect:404";
+	}
 }

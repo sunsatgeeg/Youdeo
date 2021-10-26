@@ -44,10 +44,7 @@ public class MainController {
 	}
 
 
-	@RequestMapping(value = "settings")
-	public String settings() {
-		return "settings";
-	}
+
 
 
 

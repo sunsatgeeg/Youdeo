@@ -6,23 +6,12 @@ public class User {
 	private String u_name;
 	private String u_email;
 	private String u_phone;
-	private String u_birthday;
+	private String u_profileimg;
+	private String u_bannerimg;
 	private int u_verified;
 
 	public User() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public User(String u_id, String u_password, String u_name, String u_email, String u_phone, String u_birthday,
-			int u_verified) {
-		super();
-		this.u_id = u_id;
-		this.u_password = u_password;
-		this.u_name = u_name;
-		this.u_email = u_email;
-		this.u_phone = u_phone;
-		this.u_birthday = u_birthday;
-		this.u_verified = u_verified;
 	}
 
 	public String getU_id() {
@@ -65,12 +54,20 @@ public class User {
 		this.u_phone = u_phone;
 	}
 
-	public String getU_birthday() {
-		return u_birthday;
+	public String getU_profileimg() {
+		return u_profileimg;
 	}
 
-	public void setU_birthday(String u_birthday) {
-		this.u_birthday = u_birthday;
+	public void setU_profileimg(String u_profileimg) {
+		this.u_profileimg = u_profileimg;
+	}
+
+	public String getU_bannerimg() {
+		return u_bannerimg;
+	}
+
+	public void setU_bannerimg(String u_bannerimg) {
+		this.u_bannerimg = u_bannerimg;
 	}
 
 	public int getU_verified() {
@@ -81,10 +78,24 @@ public class User {
 		this.u_verified = u_verified;
 	}
 
+	public User(String u_id, String u_password, String u_name, String u_email, String u_phone, String u_profileimg,
+			String u_bannerimg, int u_verified) {
+		super();
+		this.u_id = u_id;
+		this.u_password = u_password;
+		this.u_name = u_name;
+		this.u_email = u_email;
+		this.u_phone = u_phone;
+		this.u_profileimg = u_profileimg;
+		this.u_bannerimg = u_bannerimg;
+		this.u_verified = u_verified;
+	}
+
 	@Override
 	public String toString() {
 		return "User [u_id=" + u_id + ", u_password=" + u_password + ", u_name=" + u_name + ", u_email=" + u_email
-				+ ", u_phone=" + u_phone + ", u_birthday=" + u_birthday + ", u_verified=" + u_verified + "]";
+				+ ", u_phone=" + u_phone + ", u_profileimg=" + u_profileimg + ", u_bannerimg=" + u_bannerimg
+				+ ", u_verified=" + u_verified + "]";
 	}
 
 	// 패스워드 일치 여부 검사

@@ -29,6 +29,18 @@
 		where u_id=#{u_id}
 	</update>
 	
+	<update id="updateProfileImage" parameterType="com.geeg.youdeo.user.User">
+		update userinfo
+		set u_profileimg = '${u_profileimg}'
+		where u_id=#{u_id}
+	</update>
+	
+	<update id="updateBannerImage" parameterType="com.geeg.youdeo.user.User">
+		update userinfo
+		set u_bannerimg = '${u_bannerimg}'
+		where u_id=#{u_id}
+	</update>
+	
 	<delete id="remove" parameterType="java.lang.String">
 		delete userinfo where
 		u_id=#{u_id}

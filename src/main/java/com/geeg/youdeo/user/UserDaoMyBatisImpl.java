@@ -26,6 +26,15 @@ public class UserDaoMyBatisImpl implements UserDao {
 	public int updateVerified(User user) throws Exception {
 		return sqlSession.update(NAMESPACE + "updateVerified", user);
 	}
+	@Override
+	public int updateProfileImage(User user) throws Exception{
+		return sqlSession.update(NAMESPACE + "updateProfileImage", user);
+	}
+	@Override
+	public int updateBannerImage(User user) throws Exception{
+		return sqlSession.update(NAMESPACE + "updateBannerImage", user);
+	}
+	
 
 	@Override
 	public int remove(String userId) throws Exception {
