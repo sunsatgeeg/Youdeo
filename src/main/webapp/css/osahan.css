@@ -20,7 +20,7 @@ Version: 1.0
 	-- Footer
 */
 /* Body */
-/* Twitch CSS*/
+/* Custom CSS*/
 .irkKdr {
     display: flex !important;
     flex-direction: row !important;
@@ -84,10 +84,15 @@ Version: 1.0
     background-color: var(--color-background-button-secondary-default);
     color: var(--color-text-button-secondary);
 }
+ .userSetting .form-control {
+     background: transparent none repeat scroll 0 0;
+}
+ .userSetting .form-control:disabled {
+     background-color: #e9ecef; opacity: 1;
+}
 
 
-
-
+/* Origin CSS */
  html {
      position: relative;
      min-height: 100%;

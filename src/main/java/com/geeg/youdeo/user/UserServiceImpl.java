@@ -62,6 +62,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.update(user);
 	}
 	@Override
+	public int updatePassword(User user) throws Exception {
+		return userDao.updatePassword(user);
+	}
+	@Override
 	public int updateVerified(User user) throws Exception {
 		return userDao.updateVerified(user);
 	}

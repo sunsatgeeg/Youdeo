@@ -1,10 +1,7 @@
 package com.geeg.youdeo.controller;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.geeg.youdeo.controller.interceptor.LoginCheck;
 import com.geeg.youdeo.user.User;
@@ -30,9 +25,6 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private VideoService videoService;
-	
-	private String path="C:\\spring_server\\img";
-		
 	
 	@RequestMapping(value = "user", params ="!u_id")
 	public String watch() throws Exception {
@@ -51,7 +43,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "login")
-	public String login() {
+	public String login(Model model) {
+		model.addAttribute("errorcode", -1);
 		return "login";
 	}
 	
@@ -127,6 +120,31 @@ public class UserController {
 		return "settings";
 	}
 	
+	@GetMapping(value = "profile_update_action")
+	public String profile_update_action() {
+		return "redirect:404";
+	}
+	
+	@LoginCheck
+	@PostMapping(value = "profile_update_action")
+	public String profile_update_action(@ModelAttribute User user, @RequestParam String u_newpassword, HttpSession session) throws Exception {
+		String forwardPath = "";
+		String sUserId = (String)session.getAttribute("sUserId");
+		System.out.println(sUserId);
+		System.out.println(u_newpassword);
+		
+		if(user.getU_password().equals("") || user.getU_password()==null) {
+			userService.update(new User(sUserId, null, user.getU_name(), user.getU_email(), user.getU_phone(), null, null, 0));
+			forwardPath = "redirect:settings";
+		}else if(userService.login(sUserId, user.getU_password())==2){
+			userService.updatePassword(new User(sUserId, u_newpassword, user.getU_name(), user.getU_email(), user.getU_phone(), null, null, 0));
+			forwardPath = "redirect:settings";
+		}else {
+			forwardPath = "redirect:404";
+		}
+		return forwardPath;
+	}
+	
 	@GetMapping(value = "profile_image_upload_action")
 	public String profile_image_upload_action() {
 		return "redirect:404";
@@ -136,4 +154,5 @@ public class UserController {
 	public String banner_image_upload_action() {
 		return "redirect:404";
 	}
+	
 }

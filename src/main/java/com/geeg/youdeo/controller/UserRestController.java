@@ -22,6 +22,8 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 	
+	private String path="/img/user";
+	
 	@RequestMapping(value = "/u_id_duplicate_check_rest", produces = "text/plain;charset=UTF-8")
 	public String u_id_duplicate_check(@RequestParam String u_id) throws Exception{
 		boolean isDuplicate= userService.isDuplcateUserId(u_id);
@@ -65,7 +67,7 @@ public class UserRestController {
 	public String banner_image_upload_action(@RequestParam("bannerAttachFile") MultipartFile multiFile, Model model, MultipartHttpServletRequest request, HttpSession session) throws Exception {
 		String sUserId = (String)session.getAttribute("sUserId");
 		
-		String uploadPath = request.getSession().getServletContext().getRealPath("/img/user");
+		String uploadPath = request.getSession().getServletContext().getRealPath(path);
 		//System.out.println("\tuploadpath : " + uploadPath);
 		
 		String originalFileName = multiFile.getOriginalFilename().toLowerCase();

@@ -5,24 +5,7 @@ Author URI: https://themeforest.net/user/askbootstrap
 Version: 1.0
 */
 
-// 로그인
-function login_action() {
-	if (document.f.u_id.value == "") {
-		alert("사용자 아이디를 입력하십시요.");
-		document.f.u_id.focus();
-		return false;
-	}
-	if (document.f.u_password.value == "") {
-		alert("비밀번호를 입력하십시요.");
-		document.f.u_password.focus();
-		return false;
-	}
-
-	f.action = "login_action";
-	f.method = 'POST';
-	f.submit();
-}
-
+// 현재 링크 받아와서 include_left에 active
 $(function(){
     var url = window.location.pathname,
 	urlRegExp = new RegExp(url.replace(/\/$/, '') + "$");  

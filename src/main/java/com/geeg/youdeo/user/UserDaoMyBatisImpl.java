@@ -23,6 +23,10 @@ public class UserDaoMyBatisImpl implements UserDao {
 		return sqlSession.update(NAMESPACE + "update", user);
 	}
 	@Override
+	public int updatePassword(User user) throws Exception {
+		return sqlSession.update(NAMESPACE + "updatePassword", user);
+	}
+	@Override
 	public int updateVerified(User user) throws Exception {
 		return sqlSession.update(NAMESPACE + "updateVerified", user);
 	}

@@ -7,6 +7,7 @@ public interface UserDao {
 	int create(User user) throws Exception;
 
 	int update(User user) throws Exception;
+	int updatePassword(User user) throws Exception;
 	int updateVerified(User user) throws Exception;
 	int updateProfileImage(User user) throws Exception;
 	int updateBannerImage(User user) throws Exception;

@@ -5,7 +5,7 @@ insert into userinfo(u_id,u_password,u_name,u_email,u_phone) values('guest','gue
 insert into userinfo(u_id,u_password,u_name,u_email,u_phone) values('anon','anon','언노운','anon@naver.com','01012231523');
 insert into userinfo(u_id,u_password,u_name,u_email,u_phone) values('test','test','테스트','test@naver.com','01011245122');
 insert into userinfo(u_id,u_password,u_name,u_email,u_phone) values('geeg','geeg','기이익','geeg@naver.com','01012541234');
-
+insert into userinfo(u_id,u_password,u_name,u_email,u_phone) values('admin1','admin','admin','admin@youdeo.com',01000000000);
 
 insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
 insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
