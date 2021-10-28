@@ -33,12 +33,13 @@
 				<div class="row">
 					<div class="col-md-8 mx-auto text-center upload-video pt-5 pb-5">
 						<h1>
-							<i class="fas fa-file-upload text-primary"></i>
+							<i id="zone" class="fas fa-file-upload file-empty"></i>
 						</h1>
 						<h4 class="mt-5">Select Video files to upload</h4>
 						<p class="land">or drag and drop video files</p>
 						<div class="mt-4">
-							<a class="btn btn-outline-primary" href="upload_video">Upload Video</a>
+							<input type="file" id="videoAttachFile" multiple="multiple">
+							<button type="button" class="btn btn-outline-primary" id="videoSubmitBtn">Upload Video</a>
 						</div>
 					</div>
 				</div>
@@ -60,5 +61,66 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
+
+	<script type="text/javascript">
+
+		var $drop = $('#zone');
+
+		$drop.on("dragenter", function(e) { //In
+			e.stopPropagation();
+			e.preventDefault();
+			
+			$('.fa-file-upload').addClass('file-in')
+		}).on("dragleave", function(e) { //Out
+			e.stopPropagation();
+			e.preventDefault();
+			
+			$('.fa-file-upload').removeClass('file-in')
+		}).on("dragover", function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			
+		}).on('drop', function(e) { //Drop
+			e.preventDefault();
+			var formData = new FormData();	
+		
+			formData.append('videoAttachFile', e.originalEvent.dataTransfer.files);
+			$.ajax({
+				type : 'POST',
+				url : 'upload_video',
+				data : formData,
+				processData : false,
+				contentType : false,
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result == 'true') {
+						alert('드랙');
+					}
+				}
+			});
+		});
+
+		$('#videoSubmitBtn').click(function() {
+			var form = $('#videoAttachFile')[0].files[0];
+			var formData = new FormData();
+
+			formData.append('videoAttachFile', form);
+			$.ajax({
+				type : 'POST',
+				url : 'upload_video',
+				data : formData,
+				processData : false,
+				contentType : false,
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result == 'true') {
+						alert('드랙');
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>

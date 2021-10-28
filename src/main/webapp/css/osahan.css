@@ -90,6 +90,13 @@ Version: 1.0
  .userSetting .form-control:disabled {
      background-color: #e9ecef; opacity: 1;
 }
+.file-empty{
+     color: #d5d5d5!important;
+}
+.file-in{
+     color: #400080!important;
+}
+
 
 
 /* Origin CSS */
@@ -848,14 +855,11 @@ Version: 1.0
 }
 /* Category Slider */
  .category-item img {
-     background: #fff none repeat scroll 0 0;
-     border-radius: 50px;
-     box-shadow: 0 0 2px #ccc;
-     height: 60px;
-     margin: 1px 0 8px;
-     object-fit: scale-down;
-     transform: scale(1);
-     width: 60px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #ccc;
+    margin: 1px 0 8px;
 }
  .category-item:hover img {
      transform: scale(1.09);
@@ -1175,14 +1179,23 @@ Version: 1.0
      margin: 0 0 0 40px;
 }
  .channel-profile {
-     bottom: 0;
+     bottom: -240px;
      left: 0;
      padding: 1rem 30px;
-     position: absolute;
+     position: relative;
      right: 0;
 }
 .single-channel-image .img-fluid {
     width: 100%;
+}
+.channel-banner-img {
+    /* width: 881px; */
+    height: 360px;
+    /* border-radius: 50%; */
+    /* box-shadow: 0 0 2px #ccc; */
+    /* margin: 1px 0 8px; */
+    background-position: center;
+    background-size: cover;
 }
  .channel-profile-img {
      background: #fff none repeat scroll 0 0;

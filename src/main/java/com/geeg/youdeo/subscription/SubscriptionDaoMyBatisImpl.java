@@ -38,5 +38,10 @@ public class SubscriptionDaoMyBatisImpl implements SubscriptionDao {
 	public List<Subscription> findPopularUserList() throws Exception{
 		return sqlSession.selectList(NAMESPACE + "findPopularUserList");
 	}
+	
+	@Override
+	public Subscription findSubscriptionCount(String u_id) throws Exception{
+		return sqlSession.selectOne(NAMESPACE + "findSubscriptionCount", u_id);
+	}
 
 }

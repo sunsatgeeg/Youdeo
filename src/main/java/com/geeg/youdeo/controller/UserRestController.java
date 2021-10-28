@@ -35,7 +35,7 @@ public class UserRestController {
 	public String profile_image_upload_action(@RequestParam("profileAttachFile") MultipartFile multiFile, Model model, MultipartHttpServletRequest request, HttpSession session) throws Exception {
 		String sUserId = (String)session.getAttribute("sUserId");
 		
-		String uploadPath = request.getSession().getServletContext().getRealPath("/img/user");
+		String uploadPath = request.getSession().getServletContext().getRealPath(path);
 		//System.out.println("\tuploadpath : " + uploadPath);
 		
 		String originalFileName = multiFile.getOriginalFilename().toLowerCase();
@@ -75,7 +75,7 @@ public class UserRestController {
 		String saveFileName = sUserId + "_b" + extName;
 		
 		if(!multiFile.isEmpty() && (extName.equals(".jpg") || extName.equals(".jpeg") || extName.equals(".png"))) {
-			if(!userService.findUser(sUserId).getU_profileimg().equals("none_b.png")) {
+			if(!userService.findUser(sUserId).getU_bannerimg().equals("none_b.jpg")) {
 				new File(uploadPath, userService.findUser(sUserId).getU_bannerimg()).delete();
 			}
 			

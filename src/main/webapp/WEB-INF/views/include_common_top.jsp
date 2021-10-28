@@ -34,7 +34,7 @@
 				<li class="nav-item dropdown no-arrow osahan-right-navbar-user"><a class="nav-link dropdown-toggle user-dropdown-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img alt="Avatar" src="img/user/${sUserImage}"> ${sUserId}
 				</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-						<a class="dropdown-item" href="account"><i class="fas fa-fw fa-user-circle"></i> &nbsp; <s:message code="mychannel" /></a> <a class="dropdown-item" href="settings" action="post"><i class="fas fa-fw fa-cog"></i> &nbsp; <s:message code="settings" /></a>
+						<a class="dropdown-item" href="user?u_id=${sUserId}"><i class="fas fa-fw fa-user-circle"></i> &nbsp; <s:message code="mychannel" /></a> <a class="dropdown-item" href="settings" action="post"><i class="fas fa-fw fa-cog"></i> &nbsp; <s:message code="settings" /></a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="logout_action"><i class="fas fa-fw fa-sign-out-alt"></i> &nbsp; <s:message code="logout" /></a>
 					</div></li>

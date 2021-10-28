@@ -9,6 +9,7 @@ public interface SubscriptionService {
 
 	List<Subscription> findSubscriptionList(String u_id) throws Exception;
 	List<Subscription> findPopularUserList() throws Exception;
+	Subscription findSubscriptionCount(String u_id) throws Exception;
 	
 	int update(Subscription subscription) throws Exception;
 

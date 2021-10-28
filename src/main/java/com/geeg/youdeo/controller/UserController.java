@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geeg.youdeo.controller.interceptor.LoginCheck;
+import com.geeg.youdeo.subscription.Subscription;
+import com.geeg.youdeo.subscription.SubscriptionService;
 import com.geeg.youdeo.user.User;
 import com.geeg.youdeo.user.UserService;
 import com.geeg.youdeo.video.Video;
@@ -25,6 +27,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private VideoService videoService;
+	@Autowired
+	private SubscriptionService subscriptionService;
 	
 	@RequestMapping(value = "user", params ="!u_id")
 	public String watch() throws Exception {
@@ -35,9 +39,11 @@ public class UserController {
 	public String user(@RequestParam String u_id, Model model) throws Exception{
 		User user = userService.findUser(u_id);
 		List<Video> videoList = videoService.findChannelVideoList(u_id);
+		Subscription subscription = subscriptionService.findSubscriptionCount(u_id);
 		
 		model.addAttribute("user", user);
 		model.addAttribute("videoList", videoList);
+		model.addAttribute("sub", subscription);
 		
 		return "user";
 	}
@@ -130,8 +136,6 @@ public class UserController {
 	public String profile_update_action(@ModelAttribute User user, @RequestParam String u_newpassword, HttpSession session) throws Exception {
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
-		System.out.println(sUserId);
-		System.out.println(u_newpassword);
 		
 		if(user.getU_password().equals("") || user.getU_password()==null) {
 			userService.update(new User(sUserId, null, user.getU_name(), user.getU_email(), user.getU_phone(), null, null, 0));

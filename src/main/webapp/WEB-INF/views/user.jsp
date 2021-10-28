@@ -31,23 +31,26 @@
 		<jsp:include page="include_common_left.jsp" />
 		<div class="single-channel-page" id="content-wrapper">
 			<div class="single-channel-image">
-				<img class="img-fluid" alt="" src="img/channel-banner.png">
+				<div class="channel-banner-img" style="background-image: url(&quot;img/user/${user.u_bannerimg}&quot;);">
 				<div class="channel-profile">
-					<img class="channel-profile-img" alt="" src="img/s2.png">
+					<img class="channel-profile-img" alt="" src="img/user/${user.u_profileimg}">
+					<!-- 
 					<div class="social hidden-xs">
 						Social &nbsp; <a class="fb" href="#">Facebook</a> <a class="tw" href="#">Twitter</a> <a class="gp" href="#">Google</a>
 					</div>
+					 -->
 				</div>
 			</div>
 			<div class="single-channel-nav">
 				<nav class="navbar navbar-expand-lg navbar-light">
-					<a class="channel-brand" href="#">${user.u_name} <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></span></a>
+					<a class="channel-brand" href="#">${user.u_name} <span class="verified" title="" data-placement="top" data-toggle="tooltip" data-original-title="Verified" style="display: none"><i class="fas fa-check-circle text-success"></i></span></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item active"><a class="nav-link" href="#">Videos <span class="sr-only">(current)</span></a></li>
+							<!-- 
 							<li class="nav-item"><a class="nav-link" href="#">Playlist</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Channels</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Discussion</a></li>
@@ -58,6 +61,7 @@
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#">Something else here</a>
 								</div></li>
+							 -->
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
 							<input class="form-control form-control-sm mr-sm-1" type="search" placeholder="Search" aria-label="Search">
@@ -66,7 +70,7 @@
 							</button>
 							&nbsp;&nbsp;&nbsp;
 							<button class="btn btn-outline-danger btn-sm" type="button">
-								Subscribe <strong>1.4M</strong>
+								<strong>${sub.s_count}</strong> Subscribe
 							</button>
 						</form>
 					</div>
@@ -139,5 +143,16 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.sticky-footer').addClass('ml-0');
+			if(${user.u_verified}==1){
+				$('.verified').show();
+			}
+		});
+		
+	</script>
+	
 </body>
 </html>

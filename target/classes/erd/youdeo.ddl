@@ -11,7 +11,7 @@ CREATE TABLE userinfo(
 		u_email                       		VARCHAR2(100)		 NULL ,
 		u_phone                       		VARCHAR2(100)		 NULL ,
 		u_profileimg                  		VARCHAR2(100)		 DEFAULT 'none.png'		 NULL ,
-		u_bannerimg                   		VARCHAR2(100)		 DEFAULT 'none_b.png'		 NULL ,
+		u_bannerimg                   		VARCHAR2(100)		 DEFAULT 'none_b.jpg'		 NULL ,
 		u_verified                    		NUMBER(10)		 DEFAULT 0		 NULL 
 );
 
@@ -33,6 +33,7 @@ DROP SEQUENCE video_v_no_SEQ;
 
 CREATE SEQUENCE video_v_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
 CREATE TABLE v_comment(
 		c_no                          		NUMBER(10)		 NULL ,
 		c_date                        		DATE		 DEFAULT sysdate		 NULL ,
@@ -46,6 +47,7 @@ DROP SEQUENCE v_comment_c_no_SEQ;
 CREATE SEQUENCE v_comment_c_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
+
 CREATE TABLE subscription(
 		s_no                          		NUMBER(10)		 NULL ,
 		u_id                          		VARCHAR2(100)		 NULL ,
@@ -57,6 +59,8 @@ DROP SEQUENCE subscription_s_no_SEQ;
 
 CREATE SEQUENCE subscription_s_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
+
 CREATE TABLE view_history(
 		vh_no                         		NUMBER(10)		 NULL ,
 		u_id                          		VARCHAR2(100)		 NULL ,
@@ -67,6 +71,7 @@ CREATE TABLE view_history(
 DROP SEQUENCE view_history_vh_no_SEQ;
 
 CREATE SEQUENCE view_history_vh_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 
 

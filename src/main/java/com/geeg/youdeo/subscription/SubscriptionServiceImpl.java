@@ -25,6 +25,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	public List<Subscription> findPopularUserList() throws Exception {
 		return subscriptionDao.findPopularUserList();
 	}
+	
+	@Override
+	public Subscription findSubscriptionCount(String u_id) throws Exception{
+		return subscriptionDao.findSubscriptionCount(u_id);
+	}
 
 	@Override
 	public int update(Subscription subscription) throws Exception {

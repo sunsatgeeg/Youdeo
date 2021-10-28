@@ -13,6 +13,7 @@ public interface SubscriptionDao {
 
 	List<Subscription> findSubscriptionList(String u_id) throws Exception;
 	List<Subscription> findPopularUserList() throws Exception;
+	Subscription findSubscriptionCount(String u_id) throws Exception;
 
 	
 }

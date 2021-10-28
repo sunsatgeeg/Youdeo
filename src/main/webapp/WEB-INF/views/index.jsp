@@ -78,9 +78,9 @@
 									<c:forEach items="${subList}" var="sub">
 										<div class="item">
 											<div class="category-item">
-												<a href="#"> <img class="img-fluid" src="img/s3.png" alt="">
+												<a href="user?u_id=${sub.s_id}"> <img class="img-fluid profile" src="img/user/${sub.user.u_profileimg}" alt="">
 													<h6>${sub.s_id}</h6>
-													<p>${sub.s_count}subscribers</p>
+													<p>${sub.s_count} subscribers</p>
 												</a>
 											</div>
 										</div>
