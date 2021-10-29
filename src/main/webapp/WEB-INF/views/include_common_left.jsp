@@ -8,8 +8,6 @@
 	</a></li>
 	<li class="nav-item"><a class="nav-link" href="channels"> <i class="fas fa-fw fa-users"></i> <span><s:message code="subscribe" /></span>
 	</a></li>
-	<li class="nav-item"><a class="nav-link" href="history_page"> <i class="fas fa-fw fa-history"></i> <span><s:message code="viewhistory" /></span>
-	</a></li>
 
 	<!-- 나중에 기능 추가
 	<li class="nav-item dropdown">
