@@ -5,9 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-
 	
+	
+	@RequestMapping(value = "test_stream")
+	public String test_stream() {
+		return "test_stream";
+	}
 
+	@RequestMapping(value = "test_chat")
+	public String test_chat() {
+		return "test_chat";
+	}
+	
 	@RequestMapping(value = "404")
 	public String error404() {
 		return "404";

@@ -42,6 +42,14 @@ public class VideoController {
 	}
 	
 	@LoginCheck
+	@RequestMapping(value = "test_stream_client")
+	public String test_stream_client(Model model,HttpSession session) {
+		String sUserId = (String)session.getAttribute("sUserId");
+		model.addAttribute("sUserId", sUserId);
+		return "test_stream_client";
+	}
+	
+	@LoginCheck
 	@PostMapping(value = "upload_video", produces = "text/plain;charset=UTF-8")
 	public String upload_video(@RequestParam("videoAttachFile") MultipartFile multiFile, Model model, MultipartHttpServletRequest request, HttpSession session) throws Exception {
 		String sUserId = (String)session.getAttribute("sUserId");
