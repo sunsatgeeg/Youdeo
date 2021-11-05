@@ -13,6 +13,7 @@
 		<result column="V_VIEWS" property="v_views"/>
 		<result column="V_GOOD" property="v_good"/>
 		<result column="V_BAD" property="v_bad"/>
+		<result column="V_UUID" property="v_uuid"/>
 		<association property="user" javaType="com.geeg.youdeo.user.User" autoMapping="false">
 			<result column="U_ID" property="u_id"/>
 			<result column="U_NAME" property="u_name"/>
@@ -24,8 +25,8 @@
 		<selectKey keyProperty="v_no" resultType="java.lang.Integer" order="BEFORE" >
 			select video_v_no_SEQ.nextval from dual
 		</selectKey>
-		insert into video(v_no, v_title, v_description, v_category, v_tag, u_id) 
-		values(${v_no}, #{v_title}, #{v_description}, #{v_category}, #{v_tag}, #{u_id})
+		insert into video(v_no, v_title, v_description, v_category, v_tag, v_uuid, u_id) 
+		values(${v_no}, #{v_title}, #{v_description}, #{v_category}, #{v_tag}, #{v_uuid}, #{u_id})
 	</insert>
 	 
 	<select id="findVideo" parameterType="java.lang.Integer" resultMap="VideoUserResultMap">

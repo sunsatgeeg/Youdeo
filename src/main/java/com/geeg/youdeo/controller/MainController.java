@@ -58,17 +58,6 @@ public class MainController {
 		return "subscriptions";
 	}
 
-	@RequestMapping(value = "upload_video")
-	public String upload_video() {
-		return "upload_video";
-	}
-
-	@RequestMapping(value = "upload")
-	public String upload() {
-		return "upload";
-	}
-
-
 	
 	
 	

@@ -36,7 +36,7 @@
 						<div class="col-md-10">
 							<div class="single-video-left">
 								<div class="single-video">
-									<video width="100%" src="vid/${video.v_no}" preload="metadata" controls autoplay></video>
+									<video width="100%" src="vid/${video.v_uuid}" preload="metadata" controls autoplay></video>
 								</div>
 								<div class="single-video-title box mb-3">
 									<h2>${video.v_title }</h2>

@@ -20,6 +20,7 @@ CREATE TABLE video(
 		v_no                          		NUMBER(10)		 NULL ,
 		v_title                       		VARCHAR2(100)		 NULL ,
 		v_description                 		VARCHAR2(100)		 NULL ,
+		v_uuid                        		VARCHAR2(100)		 NULL ,
 		v_date                        		DATE		 DEFAULT sysdate		 NULL ,
 		v_time                        		NUMBER(10)		 DEFAULT 0		 NULL ,
 		v_category                    		VARCHAR2(100)		 NULL ,
@@ -35,6 +36,7 @@ DROP SEQUENCE video_v_no_SEQ;
 CREATE SEQUENCE video_v_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
+
 CREATE TABLE v_comment(
 		c_no                          		NUMBER(10)		 NULL ,
 		c_date                        		DATE		 DEFAULT sysdate		 NULL ,
@@ -47,6 +49,8 @@ DROP SEQUENCE v_comment_c_no_SEQ;
 
 CREATE SEQUENCE v_comment_c_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
+
 CREATE TABLE subscription(
 		s_no                          		NUMBER(10)		 NULL ,
 		u_id                          		VARCHAR2(100)		 NULL ,
@@ -57,6 +61,7 @@ CREATE TABLE subscription(
 DROP SEQUENCE subscription_s_no_SEQ;
 
 CREATE SEQUENCE subscription_s_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 CREATE TABLE view_history(
 		vh_no                         		NUMBER(10)		 NULL ,

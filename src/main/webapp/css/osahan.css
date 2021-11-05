@@ -21,6 +21,10 @@ Version: 1.0
 */
 /* Body */
 /* Custom CSS*/
+.pbar{
+    margin-top: auto;
+    margin-bottom: auto;
+}
 .irkKdr {
     display: flex !important;
     flex-direction: row !important;
@@ -1108,10 +1112,12 @@ Version: 1.0
 }
 /* Upload Details */
  .imgplace {
-     background-color: #8781bd;
-     border-radius: 3px;
-     height: 94px;
-     width: 100%;
+	background-color: #8781bd;
+	border-radius: 3px;
+	background-size: cover;
+	background-position: 50% 50%;
+	width: 100%;
+	height: 94px;
 }
  .osahan-title {
      color: #000;

@@ -52,20 +52,35 @@
 						<div class="imgplace"></div>
 					</div>
 					<div class="col-lg-10">
-						<div class="osahan-size">　</div>
-						<div class="osahan-progress">
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+						<div class="thumbSelect" style="display: none">
+							<input type="file" id="thumbnailAttachFile" accept=".jpg, .jpeg, .png" class="thumbnail-image-setting__input" style="display: none">
+							<div class="jLsLts">
+								<button type="button" class="btn btn-primary" id="thumbSubmitBtn" aria-label="썸네일 사진 바꾸기">
+									<div class="evtFDZ">
+										<div class="eZactg">
+											<div class="kHhUsg">썸네일 사진 바꾸기</div>
+										</div>
+									</div>
+								</button>
 							</div>
-							<div class="osahan-close">
-								<a href="#"><i class="fas fa-times-circle"></i></a>
+							<div class="iIAhIi">
+								<p class="gfSnfA">3MB 이내의 JPEG, PNG형식이어야 합니다.</p>
 							</div>
 						</div>
-						<div class="osahan-desc">Your Video is still uploading, please keep this page open until it's done.</div>
+						<div class="pbar">
+							<div class="osahan-size">　</div>
+							<div class="osahan-progress">
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+								</div>
+							</div>
+							<div class="osahan-desc">Your Video is still uploading, please keep this page open until it's done.</div>
+						</div>
 					</div>
-					<hr>
+				<hr>
 				</div>
 				<hr>
+				<input id="upload_action_check" type="text" hidden="" value="0">
 				<div class="row uploadafter" style="display: none">
 					<div class="col-lg-12">
 						<div class="osahan-form">
@@ -116,7 +131,7 @@
 							</form>
 						</div>
 						<div class="osahan-area text-center mt-3">
-							<button class="btn btn-outline-primary uploadVideo">업로드</button>
+							<button class="btn btn-outline-primary uploadVideo">게시</button>
 						</div>
 						<hr>
 						<div class="terms text-center">
@@ -145,9 +160,12 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
-
+	<!-- 
 	<script type="text/javascript">
 		window.onbeforeunload = function() {
+			if($('#upload_action_check').val()==1){
+				return;
+			}
 			var formData = new FormData();
 			formData.append('fileName', $('#originalFileName').val());
 			$.ajax({
@@ -157,17 +175,50 @@
 				processData : false,
 				contentType : false
 			});
-
-			console.log('o');
 		}
 	</script>
-
+	 -->
 	<script type="text/javascript">
-		var $drop = $('#zone');
 
+		$("#thumbSubmitBtn").click(function() {
+			$("#thumbnailAttachFile").click();
+		});
+		
+		$("#thumbnailAttachFile").change(function() {
+			var form = $('#thumbnailAttachFile')[0].files[0];
+			var formData = new FormData();
+			var fileSize = form.size;
+
+			if (fileSize >= 3000000) {
+				alert('이미지가 3MB를 초과합니다.');
+
+				return;
+			}
+			formData.append('fileName', $('#originalFileName').val().substring(0, $('#originalFileName').val().lastIndexOf("."))+'_i.png');
+			console.log($('#originalFileName').val().substring(0, $('#originalFileName').val().lastIndexOf(".")));
+			formData.append('thumbnailAttachFile', form);
+			$.ajax({
+				type : 'POST',
+				enctype : 'multipart/form-data',
+				url : 'thumbnail_upload_action',
+				data : formData,
+				processData : false,
+				contentType : false,
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result == 'true') {
+						setTimeout(function() {
+							$('.imgplace').attr("style", 'background-image:url("video/' + $('#originalFileName').val().substring(0, $('#originalFileName').val().lastIndexOf(".")) + '_i.png"');
+						}, 1000);
+					}
+				}
+			});
+		});
+		
 		$("#videoSubmitBtn").click(function() {
 			$("#videoAttachFile").click();
-		})
+		});
 
 		$(".uploadVideo").click(function() {
 			if ($('input[name=v_title]').val() == "") {
@@ -193,7 +244,12 @@
 			} else {
 				$('input[name=v_tag]').removeClass('is-invalid');
 			}
-
+			
+			if ($('#upload_action_check').val() == 0) {
+				alert("영상 업로드중입니다.");
+				return;
+			}
+			
 			f.action = 'upload_video_action';
 			f.method = 'POST';
 			f.submit();
@@ -206,6 +262,7 @@
 			var fileName = form.name
 			var extName = fileName.substring(fileName.lastIndexOf("."), fileName.length);
 			formData.append('videoAttachFile', form);
+			formData.append('extName', extName);
 
 			$('.uploadbefore').hide();
 			$('.uploadafter').show();
@@ -232,12 +289,17 @@
 					$('#progress-bar').css('width', '0%');
 				}
 			}).done(function(msg) {
-				$('#originalFileName').val(msg + extName);
+				$('#originalFileName').val(msg);
+				$('.thumbSelect').show();
+				$('.pbar').hide();
+				$('.imgplace').attr("style", 'background-image:url("video/' + msg.replace(".mp4","") + '_i.png"');
+				$('#upload_action_check').val('1');
 			}).fail(function(jqXHR) {
 				alert(jqXHR);
 			});
 		});
 
+		var $drop = $('#zone');
 		$drop.on("dragenter", function(e) { //In
 			e.stopPropagation();
 			e.preventDefault();
@@ -258,6 +320,8 @@
 			var fileName = e.originalEvent.dataTransfer.files[0].name
 			var extName = fileName.substring(fileName.lastIndexOf("."), fileName.length);
 			formData.append('videoAttachFile', e.originalEvent.dataTransfer.files[0]);
+			formData.append('extName', extName);
+			
 
 			$('.uploadbefore').hide();
 			$('.uploadafter').show();
@@ -284,11 +348,17 @@
 					$('#progress-bar').css('width', '0%');
 				}
 			}).done(function(msg) {
-				$('#originalFileName').val(msg + extName);
+				$('#originalFileName').val(msg);
+				$('.thumbSelect').show();
+				$('.pbar').hide();
+				$('.imgplace').attr("style", 'background-image:url("video/' + msg.replace(".mp4","") + '_i.png"');
+				$('#upload_action_check').val('1');
 			}).fail(function(jqXHR) {
 				alert(jqXHR);
 			});
 		});
+		
+		
 	</script>
 </body>
 </html>

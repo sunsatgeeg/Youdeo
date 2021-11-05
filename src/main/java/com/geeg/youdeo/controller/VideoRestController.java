@@ -1,12 +1,18 @@
 package com.geeg.youdeo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.geeg.youdeo.controller.interceptor.LoginCheck;
+import com.geeg.youdeo.user.User;
 import com.geeg.youdeo.video.MediaTypeFactory;
+import com.geeg.youdeo.video.thumbnail.VideoThumDao;
 
 import org.springframework.http.ResponseEntity;
 
@@ -18,6 +24,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.ResourceRegion;
@@ -28,24 +35,48 @@ import org.springframework.http.HttpRange;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-@Controller
+@RestController
 public class VideoRestController {
 	private final String path = "/video/";
 
 	@PostMapping(value = "uploading_video")
-	public ResponseEntity<?> uploadFile(HttpServletRequest request, @RequestParam("videoAttachFile") MultipartFile multiFile) throws Exception {
+	public ResponseEntity<?> uploadFile(HttpServletRequest request,
+			@RequestParam("videoAttachFile") MultipartFile multiFile,
+			@RequestParam("extName") String extName) throws Exception {
 		String uuid;
+		File videoFile;
 		if (!multiFile.getOriginalFilename().isEmpty()) {
 			uuid = UUID.randomUUID().toString();
-			BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(
-					request.getSession().getServletContext().getRealPath(path), uuid)));
+			
+			videoFile = new File(request.getSession().getServletContext().getRealPath(path), uuid+extName);
+			BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(videoFile));
 			outputStream.write(multiFile.getBytes());
 			outputStream.flush();
 			outputStream.close();
 		} else {
 			return new ResponseEntity<>("Empty File", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(uuid, HttpStatus.OK);
+		VideoThumDao VideoThumDao = new VideoThumDao();
+		VideoThumDao.getThumbnail(videoFile);
+
+		return new ResponseEntity<>(uuid+extName, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "thumbnail_upload_action", produces = "text/plain;charset=UTF-8")
+	public String profile_image_upload_action(@RequestParam("thumbnailAttachFile") MultipartFile multiFile, @RequestParam("fileName") String fileName, MultipartHttpServletRequest request) throws Exception {
+		String uploadPath = request.getSession().getServletContext().getRealPath(path);
+		//System.out.println("\tuploadpath : " + uploadPath);
+		
+		String originalFileName = multiFile.getOriginalFilename().toLowerCase();
+		String extName = originalFileName.substring(originalFileName.lastIndexOf("."), originalFileName.length());
+		
+		if(!multiFile.isEmpty() && (extName.equals(".jpg") || extName.equals(".jpeg") || extName.equals(".png"))) {
+			File file = new File(uploadPath, fileName);
+			
+			multiFile.transferTo(file);
+			return "true";
+		}
+		return "false";
 	}
 
 	@GetMapping(value = "vid/{name}")

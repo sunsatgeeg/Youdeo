@@ -16,6 +16,7 @@ public class Video {
 	private int v_good;
 	private int v_bad;
 	private User user;
+	private String v_uuid;
 
 	public Video() {
 		// TODO Auto-generated constructor stub
@@ -109,8 +110,16 @@ public class Video {
 		this.user = user;
 	}
 
+	public String getV_uuid() {
+		return v_uuid;
+	}
+
+	public void setV_uuid(String v_uuid) {
+		this.v_uuid = v_uuid;
+	}
+
 	public Video(int v_no, String v_title, String v_description, String v_date, int v_time, String v_category,
-			String v_tag, int v_views, int v_good, int v_bad, User user) {
+			String v_tag, int v_views, int v_good, int v_bad, User user, String v_uuid) {
 		super();
 		this.v_no = v_no;
 		this.v_title = v_title;
@@ -123,13 +132,14 @@ public class Video {
 		this.v_good = v_good;
 		this.v_bad = v_bad;
 		this.user = user;
+		this.v_uuid = v_uuid;
 	}
 
 	@Override
 	public String toString() {
 		return "Video [v_no=" + v_no + ", v_title=" + v_title + ", v_description=" + v_description + ", v_date="
 				+ v_date + ", v_time=" + v_time + ", v_category=" + v_category + ", v_tag=" + v_tag + ", v_views="
-				+ v_views + ", v_good=" + v_good + ", v_bad=" + v_bad + ", user=" + user + "]";
+				+ v_views + ", v_good=" + v_good + ", v_bad=" + v_bad + ", user=" + user + ", v_uuid=" + v_uuid + "]";
 	}
 
 }

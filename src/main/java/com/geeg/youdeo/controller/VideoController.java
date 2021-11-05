@@ -69,19 +69,9 @@ public class VideoController {
 	}
 	
 	@LoginCheck
-	@RequestMapping(value = "remove_data")
-	public void remove_data(@RequestParam(required = false) String fileName, HttpServletRequest request) {
-		System.out.println(fileName);
-		if((!fileName.equals("") || fileName != "")) {
-			try {
-				fileName = fileName.substring(0,fileName.lastIndexOf("."));
-				File file = new File(request.getSession().getServletContext().getRealPath(path), fileName);
-				file.delete();
-			}catch (Exception e) {
-				
-				System.out.println("\t" + e + " : 영상 업로드 도중 취소");
-			}
-		}
+	@RequestMapping(value = "upload_video")
+	public String upload_video() {
+		return "upload_video";
 	}
 	
 	@LoginCheck
@@ -95,7 +85,7 @@ public class VideoController {
 								      HttpServletRequest request,
 								      HttpSession session) throws Exception {
 		String uploadPath = request.getSession().getServletContext().getRealPath(path);
-		System.out.println("\tuploadpath : " + uploadPath);
+		//System.out.println("\tuploadpath : " + uploadPath);
 		
 		uuidFile = uuidFile.toLowerCase();
 		String originalFileName = uuidFile.substring(0,uuidFile.lastIndexOf("."));
@@ -111,21 +101,49 @@ public class VideoController {
 			map.put("u_id", sUserId);
 			map.put("v_tag", v_tag);
 			map.put("v_no", 0);
+			map.put("v_uuid", originalFileName);
 			
 			videoService.create(map);
 			int videoNo = (Integer)map.get("v_no");
 			
-			System.out.println(videoNo);
-			
-			String saveFileName = videoNo + extName;
-			boolean result = new File(uploadPath, originalFileName).renameTo(new File(uploadPath, saveFileName));
-			
-			if(result) {
+			if(videoNo != -1) {
 				return "redirect:watch?v_no="+videoNo;
 			}
 		}
 		
 		return "redirect:index";
+	}
+	
+	@LoginCheck
+	@RequestMapping(value = "remove_data")
+	public void remove_data(@RequestParam(required = false) String fileName, HttpServletRequest request) {
+		if((!fileName.equals("") || fileName != "")) {
+			try {
+				String videoPath = request.getSession().getServletContext().getRealPath(path);
+				String trashPath = request.getSession().getServletContext().getRealPath(path+"trash/");
+				fileName = fileName.substring(0,fileName.lastIndexOf("."));
+				File file = new File(request.getSession().getServletContext().getRealPath(path), fileName);
+				File file_i = new File(request.getSession().getServletContext().getRealPath(path), fileName+"_i.png");
+				
+				for(int i=0; i<100; i++) {
+		            if(new File(videoPath, file.getName()).renameTo(new File(trashPath, file.getName()))) {
+		            	System.out.println("video 이동");
+		            	if(new File(videoPath, file_i.getName()).renameTo(new File(trashPath, file_i.getName()))) {
+		            		System.out.println("video_img 이동");
+			                break;
+		            	}
+		            } else {
+		                try {
+		                    Thread.sleep(1000);
+		                } catch(InterruptedException e) {
+		                    e.printStackTrace();
+		                }
+		            }
+				}
+			}catch (Exception e) {
+				System.out.println("\t" + e + " : 영상 업로드 도중 취소 Error");
+			}
+		}
 	}
 	
 	
