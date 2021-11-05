@@ -11,6 +11,7 @@ public class Video {
 	private String v_date;
 	private int v_time;
 	private String v_category;
+	private String v_tag;
 	private int v_views;
 	private int v_good;
 	private int v_bad;
@@ -68,6 +69,14 @@ public class Video {
 		this.v_category = v_category;
 	}
 
+	public String getV_tag() {
+		return v_tag;
+	}
+
+	public void setV_tag(String v_tag) {
+		this.v_tag = v_tag;
+	}
+
 	public int getV_views() {
 		return v_views;
 	}
@@ -101,7 +110,7 @@ public class Video {
 	}
 
 	public Video(int v_no, String v_title, String v_description, String v_date, int v_time, String v_category,
-			int v_views, int v_good, int v_bad, User user) {
+			String v_tag, int v_views, int v_good, int v_bad, User user) {
 		super();
 		this.v_no = v_no;
 		this.v_title = v_title;
@@ -109,6 +118,7 @@ public class Video {
 		this.v_date = v_date;
 		this.v_time = v_time;
 		this.v_category = v_category;
+		this.v_tag = v_tag;
 		this.v_views = v_views;
 		this.v_good = v_good;
 		this.v_bad = v_bad;
@@ -118,10 +128,8 @@ public class Video {
 	@Override
 	public String toString() {
 		return "Video [v_no=" + v_no + ", v_title=" + v_title + ", v_description=" + v_description + ", v_date="
-				+ v_date + ", v_time=" + v_time + ", v_category=" + v_category + ", v_views=" + v_views + ", v_good="
-				+ v_good + ", v_bad=" + v_bad + ", user=" + user + "]";
+				+ v_date + ", v_time=" + v_time + ", v_category=" + v_category + ", v_tag=" + v_tag + ", v_views="
+				+ v_views + ", v_good=" + v_good + ", v_bad=" + v_bad + ", user=" + user + "]";
 	}
 
-	
-	
 }

@@ -85,6 +85,8 @@
 			var formData = new FormData();	
 		
 			formData.append('videoAttachFile', e.originalEvent.dataTransfer.files);
+			console.log(e.originalEvent.dataTransfer.files);
+			console.log(formData);
 			$.ajax({
 				type : 'POST',
 				url : 'upload_video',
@@ -101,11 +103,15 @@
 			});
 		});
 
-		$('#videoSubmitBtn').click(function() {
+		$('#videoAttachFile').change(function() {
 			var form = $('#videoAttachFile')[0].files[0];
 			var formData = new FormData();
 
 			formData.append('videoAttachFile', form);
+			
+
+			console.log(form);
+			console.log(formData);
 			$.ajax({
 				type : 'POST',
 				url : 'upload_video',

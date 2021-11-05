@@ -29,7 +29,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<li class="nav-item mx-1"><a class="nav-link" href="upload"> <i class="fas fa-plus-circle fa-fw"></i> <s:message code="uploadvideo" />
+				<li class="nav-item mx-1"><a class="nav-link" href="upload_video"> <i class="fas fa-plus-circle fa-fw"></i> <s:message code="uploadvideo" />
 				</a></li>
 				<li class="nav-item dropdown no-arrow osahan-right-navbar-user"><a class="nav-link dropdown-toggle user-dropdown-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img alt="Avatar" src="img/user/${sUserImage}"> ${sUserId}
 				</a>

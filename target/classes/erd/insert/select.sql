@@ -24,4 +24,4 @@ join userinfo u
 on v.u_id=u.u_id
 where v_no = 1;
 
-commit;
+select video_v_no_SEQ.currval from dual;

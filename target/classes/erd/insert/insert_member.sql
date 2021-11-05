@@ -7,15 +7,15 @@ insert into userinfo(u_id,u_password,u_name,u_email,u_phone) values('test','test
 insert into userinfo(u_id,u_password,u_name,u_email,u_phone) values('geeg','geeg','기이익','geeg@naver.com','01012541234');
 insert into userinfo(u_id,u_password,u_name,u_email,u_phone) values('admin1','admin','admin','admin@youdeo.com',01000000000);
 
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
-insert into video(v_no, v_title, v_description, v_category, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '호러', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '공포', '720p,1080p', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '코믹', '720p', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '판타지', '스트리머,1080p', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '시사', '기익,1080p', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '공포', '리그오브레전드,롤,1080p', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '다큐', '롤,1080p', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '코믹', '리그오브레전드,1080p', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '스포츠', '레전드,1080p', 'sjssj7777','32');
+insert into video(v_no, v_title, v_description, v_category, v_tag, u_id, v_time) values(video_v_no_SEQ.nextval, '제목', '내용', '판타지', '리그,오브,레전드,리그오브,오브레전드,720p,1080p', 'sjssj7777','32');
 
 
 insert into subscription(s_no, u_id, s_id, s_alram) values(subscription_s_no_SEQ.nextval, 'geeg', 'asdf', 0);

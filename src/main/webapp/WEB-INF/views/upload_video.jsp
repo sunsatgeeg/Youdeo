@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +29,20 @@
 		<jsp:include page="include_common_left.jsp" />
 		<div id="content-wrapper">
 			<div class="container-fluid upload-details">
-				<div class="row">
+				<div class="row uploadbefore">
+					<div class="col-md-8 mx-auto text-center upload-video pt-5 pb-5">
+						<h1>
+							<i id="zone" class="fas fa-file-upload file-empty"></i>
+						</h1>
+						<h4 class="mt-5">Select Video files to upload</h4>
+						<p class="land">or drag and drop video files</p>
+						<div class="mt-4">
+							<input type="file" id="videoAttachFile" multiple="multiple" hidden="">
+							<button type="button" class="btn btn-outline-primary" id="videoSubmitBtn">Upload Video</button>
+						</div>
+					</div>
+				</div>
+				<div class="row uploadafter" style="display: none">
 					<div class="col-lg-12">
 						<div class="main-title">
 							<h6>Upload Details</h6>
@@ -40,11 +52,10 @@
 						<div class="imgplace"></div>
 					</div>
 					<div class="col-lg-10">
-						<div class="osahan-title">Contrary to popular belief, Lorem Ipsum (2019) is not.</div>
-						<div class="osahan-size">102.6 MB . 2:13 MIN Remaining</div>
+						<div class="osahan-size">　</div>
 						<div class="osahan-progress">
 							<div class="progress">
-								<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+								<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
 							</div>
 							<div class="osahan-close">
 								<a href="#"><i class="fas fa-times-circle"></i></a>
@@ -52,213 +63,60 @@
 						</div>
 						<div class="osahan-desc">Your Video is still uploading, please keep this page open until it's done.</div>
 					</div>
+					<hr>
 				</div>
 				<hr>
-				<div class="row">
+				<div class="row uploadafter" style="display: none">
 					<div class="col-lg-12">
 						<div class="osahan-form">
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="form-group">
-										<label for="e1">Video Title</label> <input type="text" placeholder="Contrary to popular belief, Lorem Ipsum (2019) is not." id="e1" class="form-control">
+							<form name='f'>
+								<input id="originalFileName" name="uuidFile" type="text" hidden="">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="e1">영상 제목</label> <input type="text" placeholder="Contrary to popular belief, Lorem Ipsum (2019) is not." name="v_title" class="form-control">
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="e2">영상 내용</label>
+											<textarea rows="3" name="v_description" class="form-control" placeholder="Description"></textarea>
+										</div>
 									</div>
 								</div>
-								<div class="col-lg-12">
-									<div class="form-group">
-										<label for="e2">About</label>
-										<textarea rows="3" id="e2" name="e2" class="form-control">Description</textarea>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="e7">태그</label> <input type="text" placeholder="Gaming, PS4" name="v_tag" class="form-control">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="e5">카테고리</label> 
+											<select id="e5" name="v_category" class="custom-select">
+												<option>영화/애니메이션</option>
+												<option>자동차/교통</option>
+												<option>음악</option>
+												<option>애완동물/동물</option>
+												<option>스포츠</option>
+												<option>여행/이벤트</option>
+												<option>게임</option>
+												<option>인물/블로그</option>
+												<option>코미디</option>
+												<option>엔터테인먼트</option>
+												<option>뉴스/정치</option>
+												<option>노하우/스타일</option>
+												<option>교육</option>
+												<option>과학기술</option>
+												<option>비영리/사회운동</option>
+											</select>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-3">
-									<div class="form-group">
-										<label for="e3">Orientation</label> <select id="e3" class="custom-select">
-											<option>Straight</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<div class="form-group">
-										<label for="e4">Privacy Settings</label> <select id="e4" class="custom-select">
-											<option>Public</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<div class="form-group">
-										<label for="e5">Monetize</label> <select id="e5" class="custom-select">
-											<option>Yes</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<div class="form-group">
-										<label for="e6">License</label> <select id="e6" class="custom-select">
-											<option>Standard</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-5">
-									<div class="form-group">
-										<label for="e7">Tags (13 Tags Remaining)</label> <input type="text" placeholder="Gaming, PS4" id="e7" class="form-control">
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="form-group">
-										<label for="e8">Cast (Optional)</label> <input type="text" placeholder="Nathan Drake," id="e8" class="form-control">
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<div class="form-group">
-										<label for="e9">Language in Video (Optional)</label> <select id="e9" class="custom-select">
-											<option>English</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="row ">
-								<div class="col-lg-12">
-									<div class="main-title">
-										<h6>Category ( you can select upto 6 categories )</h6>
-									</div>
-								</div>
-							</div>
-							<div class="row category-checkbox">
-								<!-- checkbox 1col -->
-								<div class="col-lg-2 col-xs-6 col-4">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck1"> <label class="custom-control-label" for="customCheck1">Abaft</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck2"> <label class="custom-control-label" for="customCheck2">Brick</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck3"> <label class="custom-control-label" for="customCheck3">Purpose</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck4"> <label class="custom-control-label" for="customCheck4">Shallow</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck5"> <label class="custom-control-label" for="customCheck5">Spray</label>
-									</div>
-								</div>
-								<!-- checkbox 2col -->
-								<div class="col-lg-2 col-xs-6 col-4">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck1"> <label class="custom-control-label" for="zcustomCheck1">Cemetery</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck2"> <label class="custom-control-label" for="zcustomCheck2">Trouble</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck3"> <label class="custom-control-label" for="zcustomCheck3">Pin</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck4"> <label class="custom-control-label" for="zcustomCheck4">Fall</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck5"> <label class="custom-control-label" for="zcustomCheck5">Leg</label>
-									</div>
-								</div>
-								<!-- checkbox 3col -->
-								<div class="col-lg-2 col-xs-6 col-4">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck1"> <label class="custom-control-label" for="czcustomCheck1">Scissors</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck2"> <label class="custom-control-label" for="czcustomCheck2">Stitch</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck3"> <label class="custom-control-label" for="czcustomCheck3">Agonizing</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck4"> <label class="custom-control-label" for="czcustomCheck4">Rescue</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck5"> <label class="custom-control-label" for="czcustomCheck5">Quiet</label>
-									</div>
-								</div>
-								<!-- checkbox 1col -->
-								<div class="col-lg-2 col-xs-6 col-4">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck1"> <label class="custom-control-label" for="customCheck1">Abaft</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck2"> <label class="custom-control-label" for="customCheck2">Brick</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck3"> <label class="custom-control-label" for="customCheck3">Purpose</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck4"> <label class="custom-control-label" for="customCheck4">Shallow</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck5"> <label class="custom-control-label" for="customCheck5">Spray</label>
-									</div>
-								</div>
-								<!-- checkbox 2col -->
-								<div class="col-lg-2 col-xs-6 col-4">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck1"> <label class="custom-control-label" for="zcustomCheck1">Cemetery</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck2"> <label class="custom-control-label" for="zcustomCheck2">Trouble</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck3"> <label class="custom-control-label" for="zcustomCheck3">Pin</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck4"> <label class="custom-control-label" for="zcustomCheck4">Fall</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="zcustomCheck5"> <label class="custom-control-label" for="zcustomCheck5">Leg</label>
-									</div>
-								</div>
-								<!-- checkbox 3col -->
-								<div class="col-lg-2 col-xs-6 col-4">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck1"> <label class="custom-control-label" for="czcustomCheck1">Vessel</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck2"> <label class="custom-control-label" for="czcustomCheck2">Stitch</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck3"> <label class="custom-control-label" for="czcustomCheck3">Agonizing</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck4"> <label class="custom-control-label" for="czcustomCheck4">Rescue</label>
-									</div>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="czcustomCheck5"> <label class="custom-control-label" for="czcustomCheck5">Quiet</label>
-									</div>
-								</div>
-							</div>
+							</form>
 						</div>
 						<div class="osahan-area text-center mt-3">
-							<button class="btn btn-outline-primary">Save Changes</button>
+							<button class="btn btn-outline-primary uploadVideo">업로드</button>
 						</div>
 						<hr>
 						<div class="terms text-center">
@@ -287,5 +145,150 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
+
+	<script type="text/javascript">
+		window.onbeforeunload = function() {
+			var formData = new FormData();
+			formData.append('fileName', $('#originalFileName').val());
+			$.ajax({
+				type : 'POST',
+				url : 'remove_data',
+				data : formData,
+				processData : false,
+				contentType : false
+			});
+
+			console.log('o');
+		}
+	</script>
+
+	<script type="text/javascript">
+		var $drop = $('#zone');
+
+		$("#videoSubmitBtn").click(function() {
+			$("#videoAttachFile").click();
+		})
+
+		$(".uploadVideo").click(function() {
+			if ($('input[name=v_title]').val() == "") {
+				alert("영상 제목을 입력하세요.");
+				$('input[name=v_title]').addClass('is-invalid');
+				return;
+			} else {
+				$('input[name=v_title]').removeClass('is-invalid');
+			}
+
+			if ($('input[name=v_description]').val() == "") {
+				alert("영상내용을 입력하세요.");
+				$('input[name=v_description]').addClass('is-invalid');
+				return;
+			} else {
+				$('input[name=v_description]').removeClass('is-invalid');
+			}
+
+			if ($('input[name=v_tag]').val() == "") {
+				alert("태그를 입력하세요");
+				$('input[name=v_tag]').addClass('is-invalid');
+				return;
+			} else {
+				$('input[name=v_tag]').removeClass('is-invalid');
+			}
+
+			f.action = 'upload_video_action';
+			f.method = 'POST';
+			f.submit();
+
+		})
+
+		$('#videoAttachFile').change(function() {
+			var form = $('#videoAttachFile')[0].files[0];
+			var formData = new FormData();
+			var fileName = form.name
+			var extName = fileName.substring(fileName.lastIndexOf("."), fileName.length);
+			formData.append('videoAttachFile', form);
+
+			$('.uploadbefore').hide();
+			$('.uploadafter').show();
+			$('.uploadafter').show();
+			$.ajax({
+				type : 'POST',
+				url : 'uploading_video',
+				data : formData,
+				cache : false,
+				processData : false,
+				contentType : false,
+				xhr : function() {
+					var xhr = $.ajaxSettings.xhr();
+
+					// Set the onprogress event controller 
+					xhr.upload.onprogress = function(event) {
+						var perc = Math.round((event.loaded / event.total) * 100);
+						$('.progress-bar').css('width', perc + '%');
+					};
+					return xhr;
+				},
+				beforeSend : function(xhr) {
+					$('#alertMsg').text('');
+					$('#progress-bar').css('width', '0%');
+				}
+			}).done(function(msg) {
+				$('#originalFileName').val(msg + extName);
+			}).fail(function(jqXHR) {
+				alert(jqXHR);
+			});
+		});
+
+		$drop.on("dragenter", function(e) { //In
+			e.stopPropagation();
+			e.preventDefault();
+
+			$('.fa-file-upload').addClass('file-in')
+		}).on("dragleave", function(e) { //Out
+			e.stopPropagation();
+			e.preventDefault();
+
+			$('.fa-file-upload').removeClass('file-in')
+		}).on("dragover", function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+		}).on('drop', function(e) { //Drop
+			e.preventDefault();
+			var formData = new FormData();
+			var fileName = e.originalEvent.dataTransfer.files[0].name
+			var extName = fileName.substring(fileName.lastIndexOf("."), fileName.length);
+			formData.append('videoAttachFile', e.originalEvent.dataTransfer.files[0]);
+
+			$('.uploadbefore').hide();
+			$('.uploadafter').show();
+			$('.uploadafter').show();
+			$.ajax({
+				type : 'POST',
+				url : 'uploading_video',
+				data : formData,
+				cache : false,
+				processData : false,
+				contentType : false,
+				xhr : function() {
+					var xhr = $.ajaxSettings.xhr();
+
+					// Set the onprogress event controller 
+					xhr.upload.onprogress = function(event) {
+						var perc = Math.round((event.loaded / event.total) * 100);
+						$('.progress-bar').css('width', perc + '%');
+					};
+					return xhr;
+				},
+				beforeSend : function(xhr) {
+					$('#alertMsg').text('');
+					$('#progress-bar').css('width', '0%');
+				}
+			}).done(function(msg) {
+				$('#originalFileName').val(msg + extName);
+			}).fail(function(jqXHR) {
+				alert(jqXHR);
+			});
+		});
+	</script>
 </body>
 </html>
