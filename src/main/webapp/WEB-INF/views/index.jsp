@@ -87,7 +87,7 @@
 					</div>
 				</div>
 				<hr>
-				<div class="video-block section-padding">
+				<div class="video-block video-section section-padding">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="main-title">
@@ -111,7 +111,7 @@
 										<div class="video-view">
 											<span class="video-views">${video.v_views}</span>
 											&nbsp;
-											<i class="fas fa-calendar-alt"></i><span class="video-date">${video.v_date }</span>
+											<i class="fas fa-calendar-alt"></i><span class="video-date">${video.v_date}</span>
 										</div>
 									</div>
 								</div>
@@ -137,5 +137,10 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
+	<script type="text/javascript">
+		changeDate();
+		chageView();
+		changePlayTime();
+	</script>
 </body>
 </html>

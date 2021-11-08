@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
 		<jsp:include page="include_common_left.jsp" />
 		<div id="content-wrapper">
 			<div class="container-fluid pb-0">
-				<div class="video-block section-padding">
+				<div class="video-block subvideo-section section-padding">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="main-title">
@@ -44,82 +45,28 @@
 								<h6>Featured Videos</h6>
 							</div>
 						</div>
-						<div class="col-xl-3 col-sm-6 mb-3">
-							<div class="video-card">
-								<div class="video-card-image">
-									<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v5.png" alt=""></a>
-									<div class="time">3:50</div>
-								</div>
-								<div class="video-card-body">
-									<div class="video-title">
-										<a href="#">There are many variations of passages of Lorem</a>
+						<input type="text" id="video_last_no" value="${vidLastNo }" hidden="">
+						<c:forEach items="${subVideoList}" var="video">
+							<div class="col-xl-3 col-sm-6 mb-3">
+								<div class="video-card">
+									<div class="video-card-image">
+										<a class="play-icon" href="watch?v_no=${video.v_no}"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="video/${video.v_uuid}_i.png" alt=""></a>
+										<div class="time">${video.v_time }</div>
 									</div>
-									<div class="video-page text-success">
-										Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-									</div>
-									<div class="video-view">
-										1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-sm-6 mb-3">
-							<div class="video-card">
-								<div class="video-card-image">
-									<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v6.png" alt=""></a>
-									<div class="time">3:50</div>
-								</div>
-								<div class="video-card-body">
-									<div class="video-title">
-										<a href="#">There are many variations of passages of Lorem</a>
-									</div>
-									<div class="video-page text-danger">
-										Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Unverified"><i class="fas fa-frown text-danger"></i></a>
-									</div>
-									<div class="video-view">
-										1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
+									<div class="video-card-body">
+										<div class="video-title">
+											<a href="#">${video.v_title}</a>
+										</div>
+										<div class="video-view">
+											<span class="video-views">${video.v_views}</span>
+											&nbsp;
+											<i class="fas fa-calendar-alt"></i><span class="video-date">${video.v_date}</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-xl-3 col-sm-6 mb-3">
-							<div class="video-card">
-								<div class="video-card-image">
-									<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v7.png" alt=""></a>
-									<div class="time">3:50</div>
-								</div>
-								<div class="video-card-body">
-									<div class="video-title">
-										<a href="#">There are many variations of passages of Lorem</a>
-									</div>
-									<div class="video-page text-success">
-										Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-									</div>
-									<div class="video-view">
-										1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-sm-6 mb-3">
-							<div class="video-card">
-								<div class="video-card-image">
-									<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v8.png" alt=""></a>
-									<div class="time">3:50</div>
-								</div>
-								<div class="video-card-body">
-									<div class="video-title">
-										<a href="#">There are many variations of passages of Lorem</a>
-									</div>
-									<div class="video-page text-success">
-										Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-									</div>
-									<div class="video-view">
-										1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-									</div>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
+						
 					</div>
 				</div>
 			</div>
@@ -140,5 +87,10 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
+	<script type="text/javascript">
+		changeDate();
+		chageView();
+		changePlayTime();
+	</script>
 </body>
 </html>

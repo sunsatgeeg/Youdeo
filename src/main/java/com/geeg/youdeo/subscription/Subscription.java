@@ -1,6 +1,7 @@
 package com.geeg.youdeo.subscription;
 
 import com.geeg.youdeo.user.User;
+import com.geeg.youdeo.video.Video;
 
 public class Subscription {
 	private int s_no;
@@ -8,18 +9,10 @@ public class Subscription {
 	private String s_id;
 	private int s_alram;
 	private int s_count;
+	private Video video;
 
 	public Subscription() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Subscription(int s_no, User user, String s_id, int s_alram, int s_count) {
-		super();
-		this.s_no = s_no;
-		this.user = user;
-		this.s_id = s_id;
-		this.s_alram = s_alram;
-		this.s_count = s_count;
 	}
 
 	public int getS_no() {
@@ -62,10 +55,28 @@ public class Subscription {
 		this.s_count = s_count;
 	}
 
+	public Video getVideo() {
+		return video;
+	}
+
+	public void setVideo(Video video) {
+		this.video = video;
+	}
+
+	public Subscription(int s_no, User user, String s_id, int s_alram, int s_count, Video video) {
+		super();
+		this.s_no = s_no;
+		this.user = user;
+		this.s_id = s_id;
+		this.s_alram = s_alram;
+		this.s_count = s_count;
+		this.video = video;
+	}
+
 	@Override
 	public String toString() {
 		return "Subscription [s_no=" + s_no + ", user=" + user + ", s_id=" + s_id + ", s_alram=" + s_alram
-				+ ", s_count=" + s_count + "]";
+				+ ", s_count=" + s_count + ", video=" + video + "]";
 	}
 
 }

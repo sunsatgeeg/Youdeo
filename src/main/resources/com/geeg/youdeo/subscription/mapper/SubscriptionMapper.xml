@@ -14,8 +14,7 @@
 			<result column="U_VERIFIED" property="u_verified"/> 
 		</association>
 	</resultMap>
-
-
+	
 	<insert id="create" parameterType="java.util.Map">
 		insert into subscription(s_no, u_id, s_id) 
 		values(subscription_s_no_SEQ.nextval, #{u_id}, #{s_id})
@@ -28,7 +27,7 @@
 	<select id="findSubscriptionList" parameterType="java.lang.String" resultMap="SubscriptionWithUserResultMap">
 		select s.s_no, s.u_id, s.s_id, s.s_alram,(select count(*) from subscription s1 where s1.s_id=s.s_id) s_count, u.u_name, u.u_email, u.u_phone, u.u_profileimg, u.u_bannerimg, u.u_verified from subscription s join userinfo u on s.s_id = u.u_id where s.u_id=#{u_id}
 	</select>
-	
+
 	<select id="findPopularUserList" resultMap="SubscriptionWithUserResultMap">
 		select * from (select s_id, (select count(*) from subscription s1 where s1.s_id=s.s_id) s_count from subscription s GROUP BY s_id) sg join userinfo u on sg.s_id=u.u_id order by s_count desc
 	</select>

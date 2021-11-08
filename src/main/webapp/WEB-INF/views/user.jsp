@@ -148,6 +148,9 @@
 
 	<script type="text/javascript">
 		$('.sticky-footer').addClass('ml-0');
+		changeDate();
+		chageView();
+		changePlayTime();
 	</script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geeg.youdeo.video.mapper.VideoMapper">
 
-	<resultMap type="com.geeg.youdeo.video.Video" id="VideoUserResultMap" autoMapping="false">
+	<resultMap type="com.geeg.youdeo.video.Video" id="VideoWithUserResultMap" autoMapping="false">
 		<result column="V_NO" property="v_no"/>
 		<result column="V_TITLE" property="v_title"/>
 		<result column="V_DESCRIPTION" property="v_description"/>
@@ -21,6 +21,26 @@
 			<result column="U_PROFILEIMG" property="u_profileimg"/> 
 		</association>
 	</resultMap>
+	
+	<resultMap type="com.geeg.youdeo.video.Video" id="VideoWithSubscriptionResultMap" autoMapping="false">
+		<result column="V_NO" property="v_no"/>
+		<result column="V_TITLE" property="v_title"/>
+		<result column="V_DESCRIPTION" property="v_description"/>
+		<result column="V_DATE" property="v_date"/>
+		<result column="V_TIME" property="v_time"/>
+		<result column="V_CATEGORY" property="v_category"/>
+		<result column="V_TAG" property="v_tag"/>
+		<result column="V_VIEWS" property="v_views"/>
+		<result column="V_GOOD" property="v_good"/>
+		<result column="V_BAD" property="v_bad"/>
+		<result column="V_UUID" property="v_uuid"/>
+		<association property="subscription" javaType="com.geeg.youdeo.subscription.Subscription" autoMapping="false">
+			<result column="S_NO" property="s_no"/>
+			<result column="S_ID" property="s_id"/>
+			<result column="S_ALRAM" property="s_alram"/>
+			<result column="S_COUNT" property="s_count"/>
+		</association>
+	</resultMap>
 
 	<insert id="create" parameterType="java.util.Map">
 		<selectKey keyProperty="v_no" resultType="java.lang.Integer" order="BEFORE" >
@@ -30,7 +50,7 @@
 		values(${v_no}, #{v_title}, #{v_description}, #{v_category}, #{v_tag}, #{v_uuid}, #{v_time}, #{u_id})
 	</insert>
 	 
-	<select id="findVideo" parameterType="java.lang.Integer" resultMap="VideoUserResultMap">
+	<select id="findVideo" parameterType="java.lang.Integer" resultMap="VideoWithUserResultMap">
 		select * from video v
 		join userinfo u
 		on v.u_id=u.u_id
@@ -47,8 +67,12 @@
 		where u_id = #{u_id}
 	</select>
 	
-	<select id="findVideoList" parameterType="java.lang.Integer" resultMap="VideoUserResultMap">
-		select * from (select rownum as rnum, v.* from (select * from video order by v_date desc) v) v1 join userinfo u on v1.u_id = u.u_id where rnum between #{last_no} and #{last_no}+15 order by rnum
+	<select id="findSubscriptionVideoList" parameterType="java.util.Map" resultMap="VideoWithSubscriptionResultMap">
+		select * from (select rownum as rnum, v.* from subscription s join (select * from video order by v_date desc) v on s.s_id=v.u_id where s.u_id=#{u_id}) where rnum between #{start_no} and #{end_no} order by rnum
+	</select>
+	
+	<select id="findVideoList" parameterType="java.util.Map" resultMap="VideoWithUserResultMap">
+		select * from (select rownum as rnum, v.* from (select * from video order by v_date desc) v) v1 join userinfo u on v1.u_id = u.u_id where rnum between #{start_no} and #{end_no} order by rnum
 	</select>
 	
 	<update id="update" parameterType="com.geeg.youdeo.video.Video">

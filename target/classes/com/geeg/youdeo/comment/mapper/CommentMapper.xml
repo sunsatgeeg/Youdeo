@@ -21,7 +21,7 @@
 	</insert>
 
 	<select id="findCommentOrderDateList" parameterType="java.util.Map" resultMap="CommentUserResultMap">
-		select * from (select rownum as rnum, vc.* from (select * from v_comment order by c_date desc) vc where vc.v_no=#{v_no}) c join userinfo u on c.u_id = u.u_id where rnum between #{last_no} and #{last_no}+4 order by rnum
+		select * from (select rownum as rnum, vc.* from (select * from v_comment order by c_date desc) vc where vc.v_no=#{v_no}) c join userinfo u on c.u_id = u.u_id where rnum between #{last_no} and #{last_no}+1 order by rnum
 	</select>
 	
 	<update id="update" parameterType="com.geeg.youdeo.comment.Comment">

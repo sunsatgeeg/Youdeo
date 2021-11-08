@@ -2,7 +2,7 @@ package com.geeg.youdeo.video.thumbnail;
 
 import java.io.File;
 
-public class VideoThumDao { 
+public class VideoThum { 
 
     public void getThumbnail(File source) throws Exception {
         double plusSize = 1;

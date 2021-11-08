@@ -48,17 +48,5 @@ public class MainController {
 		return "history_page";
 	}
 
-
-
-
-
-
-	@RequestMapping(value = "subscriptions")
-	public String subscriptions() {
-		return "subscriptions";
-	}
-
-	
-	
 	
 }

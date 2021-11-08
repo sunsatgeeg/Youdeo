@@ -49,11 +49,21 @@ public class VideoController {
 	
 	private final String path="/video/";
 
-	@RequestMapping(value = "testT")
-	public String testT(@RequestParam String fileName, Model model) {
-		model.addAttribute("fileName",fileName);
-				
-		return "testT";
+	@LoginCheck
+	@RequestMapping(value = "subscriptions")
+	public String testT(HttpSession session, Model model) throws Exception {
+		String sUserId = (String)session.getAttribute("sUserId");
+		
+		Map map = new HashMap();
+		map.put("u_id", sUserId);
+		map.put("start_no", 1);
+		map.put("end_no", 24);
+		List<Video> subVideoList = videoService.findSubscriptionVideoList(map);
+		
+		model.addAttribute("subVideoList",subVideoList);
+		model.addAttribute("vidLastNo", subVideoList.size());
+		
+		return "subscriptions";
 	}
 	
 	@RequestMapping(value = "watch", params ="!v_no")
@@ -65,9 +75,12 @@ public class VideoController {
 	public String watch(@RequestParam int v_no, Model model, HttpServletResponse response) throws Exception {
 		videoService.updateViewCount(v_no);
 		Video video = videoService.findVideo(v_no);
-		List<Video> videoList = videoService.findVideoList(1);
-		Subscription subscription = subscriptionService.findSubscriptionCount(video.getUser().getU_id());
 		Map map = new HashMap();
+		map.put("start_no", 1);
+		map.put("end_no",13);
+		List<Video> videoList = videoService.findVideoList(map);
+		Subscription subscription = subscriptionService.findSubscriptionCount(video.getUser().getU_id());
+		map = new HashMap();
 		map.put("v_no",v_no);
 		map.put("last_no",1);
 		List<Comment> commentList = commentService.findCommentOrderDateList(map);
@@ -76,7 +89,7 @@ public class VideoController {
 		model.addAttribute("videoList", videoList);
 		model.addAttribute("cmtList", commentList);
 		model.addAttribute("sub", subscription);
-		model.addAttribute("vidLastNo", videoList.size());
+		model.addAttribute("vidLastNo", videoList.size()+1);
 		model.addAttribute("cmtLastNo", commentList.size());
 		return "watch";
 	}

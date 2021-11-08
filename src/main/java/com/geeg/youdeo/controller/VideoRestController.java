@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.geeg.youdeo.controller.interceptor.LoginCheck;
 import com.geeg.youdeo.video.MediaTypeFactory;
 import com.geeg.youdeo.video.Video;
 import com.geeg.youdeo.video.VideoService;
-import com.geeg.youdeo.video.thumbnail.VideoThumDao;
+import com.geeg.youdeo.video.thumbnail.VideoThum;
 
 import org.springframework.http.ResponseEntity;
 
@@ -26,6 +27,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.UrlResource;
@@ -61,7 +63,7 @@ public class VideoRestController {
 		} else {
 			return new ResponseEntity<>("Empty File", HttpStatus.BAD_REQUEST);
 		}
-		VideoThumDao VideoThumDao = new VideoThumDao();
+		VideoThum VideoThumDao = new VideoThum();
 		VideoThumDao.getThumbnail(videoFile);
 
 		return new ResponseEntity<>(uuid+extName, HttpStatus.OK);
@@ -87,15 +89,60 @@ public class VideoRestController {
 	}
 	
 	@RequestMapping(value = "video_load", produces = "application/json;charset=UTF-8")
-	public String video_load(@RequestParam int last_no) throws Exception {
+	public String video_load(@RequestParam int start_no, @RequestParam int end_no) throws Exception {
+		Map map = new HashMap();
+		map.put("start_no", start_no);
+		map.put("end_no", end_no);
 		
-		List<Video> videoList = videoService.findVideoList(last_no+1);
+		List<Video> videoList = videoService.findVideoList(map);
 		
 		if(videoList.size() >= 1) {
 			StringBuffer sb=new StringBuffer();
 			sb.append("{");
 			sb.append("\"count\":"+videoList.size()+",");
-			sb.append("\"lastNo\":"+(last_no+videoList.size()-1)+",");
+			sb.append("\"lastNo\":"+(end_no+1)+",");
+			sb.append("\"data\": [");
+			for(int i=0;i<videoList.size();i++){
+				sb.append("{\"date\":\""+videoList.get(i).getV_date()+
+					      "\",\"no\":\""+videoList.get(i).getV_no()+
+					      "\",\"uuid\":\""+videoList.get(i).getV_uuid()+
+					      "\",\"time\":\""+videoList.get(i).getV_time()+
+					      "\",\"views\":\""+videoList.get(i).getV_views()+
+					      "\",\"title\":\""+videoList.get(i).getV_title()+"\"}");
+				if(i!=videoList.size()-1)
+					sb.append(",");
+			}
+			sb.append("]");
+			sb.append("}");
+			
+			return sb.toString();
+		}else {
+			StringBuffer sb=new StringBuffer();
+			sb.append("{");
+			sb.append("\"count\":"+videoList.size());
+			sb.append("}");
+			
+			return sb.toString();
+		}
+	}
+	
+	@LoginCheck
+	@RequestMapping(value = "subscription_video_load", produces = "application/json;charset=UTF-8")
+	public String subscription_video_load(@RequestParam int start_no, @RequestParam int end_no, HttpSession session) throws Exception {
+		String sUserId = (String)session.getAttribute("sUserId");
+		
+		Map map = new HashMap();
+		map.put("u_id", sUserId);
+		map.put("start_no", start_no);
+		map.put("end_no", end_no);
+		
+		List<Video> videoList = videoService.findSubscriptionVideoList(map);
+		
+		if(videoList.size() >= 1) {
+			StringBuffer sb=new StringBuffer();
+			sb.append("{");
+			sb.append("\"count\":"+videoList.size()+",");
+			sb.append("\"lastNo\":"+(end_no+1)+",");
 			sb.append("\"data\": [");
 			for(int i=0;i<videoList.size();i++){
 				sb.append("{\"date\":\""+videoList.get(i).getV_date()+

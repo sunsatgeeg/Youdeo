@@ -21,14 +21,17 @@ select * from subscription where s_no= (select s_no from subscription where u_id
 delete subscription where s_no = (select s_no from subscription where u_id='test' and s_id='sjssj7777');
 select s_no from subscription where u_id='test' and s_id='sjssj7777';
 
-select u_id,s_id from subscription;
-
-select * from video;
-
 select * from video v
 join userinfo u
 on v.u_id=u.u_id
 where v_no = 1;
+
+select * from video;
+select * from subscription;
+
+select * from (select rownum as rnum, v.* from (select * from video order by v_date desc) v) v1 join userinfo u on v1.u_id = u.u_id where rnum between 1 and 16 order by rnum;
+
+select * from (select rownum as rnum, v.* from subscription s join (select * from video order by v_date desc) v on s.s_id=v.u_id where s.u_id='geeg') where rnum between 32 and 28 order by rnum;
 
 select video_v_no_SEQ.currval from dual;
 

@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.geeg.youdeo.subscription.Subscription;
+
 @Service
 public class VideoServiceImpl implements VideoService {
 	@Autowired
@@ -25,10 +27,14 @@ public class VideoServiceImpl implements VideoService {
 	public List<Video> findChannelVideoList(String u_id) throws Exception {
 		return videoDao.findChannelVideoList(u_id);
 	}
+	@Override
+	public List<Video> findSubscriptionVideoList(Map map) throws Exception{
+		return videoDao.findSubscriptionVideoList(map);
+	}
 	
 	@Override
-	public List<Video> findVideoList(int last_no) throws Exception {
-		return videoDao.findVideoList(last_no);
+	public List<Video> findVideoList(Map map) throws Exception {
+		return videoDao.findVideoList(map);
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package com.geeg.youdeo.video;
 
 import java.util.Date;
 
+import com.geeg.youdeo.subscription.Subscription;
 import com.geeg.youdeo.user.User;
 
 public class Video {
@@ -17,6 +18,7 @@ public class Video {
 	private int v_bad;
 	private User user;
 	private String v_uuid;
+	private Subscription subscription;
 
 	public Video() {
 		// TODO Auto-generated constructor stub
@@ -118,8 +120,16 @@ public class Video {
 		this.v_uuid = v_uuid;
 	}
 
+	public Subscription getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
+	}
+
 	public Video(int v_no, String v_title, String v_description, String v_date, int v_time, String v_category,
-			String v_tag, int v_views, int v_good, int v_bad, User user, String v_uuid) {
+			String v_tag, int v_views, int v_good, int v_bad, User user, String v_uuid, Subscription subscription) {
 		super();
 		this.v_no = v_no;
 		this.v_title = v_title;
@@ -133,13 +143,15 @@ public class Video {
 		this.v_bad = v_bad;
 		this.user = user;
 		this.v_uuid = v_uuid;
+		this.subscription = subscription;
 	}
 
 	@Override
 	public String toString() {
 		return "Video [v_no=" + v_no + ", v_title=" + v_title + ", v_description=" + v_description + ", v_date="
 				+ v_date + ", v_time=" + v_time + ", v_category=" + v_category + ", v_tag=" + v_tag + ", v_views="
-				+ v_views + ", v_good=" + v_good + ", v_bad=" + v_bad + ", user=" + user + ", v_uuid=" + v_uuid + "]";
+				+ v_views + ", v_good=" + v_good + ", v_bad=" + v_bad + ", user=" + user + ", v_uuid=" + v_uuid
+				+ ", subscription=" + subscription + "]";
 	}
 
 }

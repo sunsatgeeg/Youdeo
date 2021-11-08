@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.geeg.youdeo.subscription.Subscription;
+
 @Repository("videoDao")
 public class VideoDaoMyBatisImpl implements VideoDao {
 	public final static String NAMESPACE = "com.geeg.youdeo.video.mapper.VideoMapper.";
@@ -47,9 +49,13 @@ public class VideoDaoMyBatisImpl implements VideoDao {
 	public List<Video> findChannelVideoList(String u_id) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "findChannelVideoList", u_id);
 	}
+	@Override
+	public List<Video> findSubscriptionVideoList(Map map) throws Exception{
+		return sqlSession.selectList(NAMESPACE + "findSubscriptionVideoList", map);
+	}
 	
-	public List<Video> findVideoList(int last_no) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "findVideoList", last_no);
+	public List<Video> findVideoList(Map map) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "findVideoList", map);
 	}
 
 

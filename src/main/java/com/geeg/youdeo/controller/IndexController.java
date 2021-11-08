@@ -36,8 +36,11 @@ public class IndexController {
 			List<Subscription> subscriptionList = subscriptionService.findSubscriptionList(sUserId);
 			model.addAttribute("subList", subscriptionList);
 		}
-
-		List<Video> videoList = videoService.findVideoList(1);
+		
+		Map map = new HashMap();
+		map.put("start_no", 1);
+		map.put("end_no", 20);
+		List<Video> videoList = videoService.findVideoList(map);
 		model.addAttribute("vidLastNo", videoList.size());
 		model.addAttribute("videoList", videoList);
 		
