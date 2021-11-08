@@ -2,13 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geeg.youdeo.comment.mapper.CommentMapper">
 
+	<resultMap type="com.geeg.youdeo.comment.Comment" id="CommentUserResultMap" autoMapping="false">
+		<result column="C_NO" property="c_no"/>
+		<result column="C_DATE" property="c_date"/>
+		<result column="C_CONTENT" property="c_content"/>
+		<association property="user" javaType="com.geeg.youdeo.user.User" autoMapping="false">
+			<result column="U_ID" property="u_id"/>
+			<result column="U_NAME" property="u_name"/>
+			<result column="U_VERIFIED" property="u_verified"/> 
+			<result column="U_PROFILEIMG" property="u_profileimg"/> 
+		</association>
+	</resultMap>
+
+
 	<insert id="create" parameterType="com.geeg.youdeo.comment.Comment">
 		insert into v_comment(c_no, c_content, u_id, v_no) 
 		values(v_comment_c_no_SEQ.nextval, #{c_content}, #{u_id}, #{v_no})
 	</insert>
 
-	<select id="findCommentList" parameterType="java.lang.String" resultType="com.geeg.youdeo.comment.Comment">
-		select * from v_comment where v_no = #{v_no}
+	<select id="findCommentOrderDateList" parameterType="java.util.Map" resultMap="CommentUserResultMap">
+		select * from (select rownum as rnum, vc.* from (select * from v_comment order by c_date desc) vc where vc.v_no=#{v_no}) c join userinfo u on c.u_id = u.u_id where rnum between #{last_no} and #{last_no}+4 order by rnum
 	</select>
 	
 	<update id="update" parameterType="com.geeg.youdeo.comment.Comment">

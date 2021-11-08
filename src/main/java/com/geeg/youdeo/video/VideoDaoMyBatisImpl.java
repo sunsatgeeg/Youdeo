@@ -23,6 +23,10 @@ public class VideoDaoMyBatisImpl implements VideoDao {
 	public int update(Video video) throws Exception {
 		return sqlSession.update(NAMESPACE + "update", video);
 	}
+	@Override
+	public int updateViewCount(int v_no) throws Exception {
+		return sqlSession.update(NAMESPACE + "updateViewCount", v_no);
+	}
 
 	@Override
 	public int remove(int v_no) throws Exception {
@@ -44,8 +48,8 @@ public class VideoDaoMyBatisImpl implements VideoDao {
 		return sqlSession.selectList(NAMESPACE + "findChannelVideoList", u_id);
 	}
 	
-	public List<Video> findVideoList() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "findVideoList");
+	public List<Video> findVideoList(int last_no) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "findVideoList", last_no);
 	}
 
 

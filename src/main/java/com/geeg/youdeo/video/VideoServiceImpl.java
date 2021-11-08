@@ -27,8 +27,8 @@ public class VideoServiceImpl implements VideoService {
 	}
 	
 	@Override
-	public List<Video> findVideoList() throws Exception {
-		return videoDao.findVideoList();
+	public List<Video> findVideoList(int last_no) throws Exception {
+		return videoDao.findVideoList(last_no);
 	}
 	
 	@Override
@@ -39,6 +39,10 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public int update(Video video) throws Exception {
 		return videoDao.update(video);
+	}
+	@Override
+	public int updateViewCount(int v_no) throws Exception {
+		return videoDao.updateViewCount(v_no);
 	}
 
 	@Override

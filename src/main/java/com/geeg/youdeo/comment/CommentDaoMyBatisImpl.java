@@ -31,8 +31,8 @@ public class CommentDaoMyBatisImpl implements CommentDao {
 	}
 
 	@Override
-	public List<Comment> findCommentList(String v_no) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "findCommentList", v_no);
+	public List<Comment> findCommentOrderDateList(Map map) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "findCommentOrderDateList", map);
 	}
 
 

@@ -1,6 +1,8 @@
 package com.geeg.youdeo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,8 +36,9 @@ public class IndexController {
 			List<Subscription> subscriptionList = subscriptionService.findSubscriptionList(sUserId);
 			model.addAttribute("subList", subscriptionList);
 		}
-		
-		List<Video> videoList = videoService.findVideoList();
+
+		List<Video> videoList = videoService.findVideoList(1);
+		model.addAttribute("vidLastNo", videoList.size());
 		model.addAttribute("videoList", videoList);
 		
 		return "index";

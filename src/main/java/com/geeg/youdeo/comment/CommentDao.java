@@ -11,6 +11,6 @@ public interface CommentDao {
 
 	int remove(int c_no) throws Exception;
 
-	List<Comment> findCommentList(String v_no) throws Exception;
+	List<Comment> findCommentOrderDateList(Map map) throws Exception;
 
 }

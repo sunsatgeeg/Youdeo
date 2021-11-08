@@ -25,10 +25,20 @@ public class SubscriptionDaoMyBatisImpl implements SubscriptionDao {
 	}
 
 	@Override
-	public int remove(int s_no) throws Exception {
-		return sqlSession.delete(NAMESPACE + "remove", s_no);
+	public int remove(Map map) throws Exception {
+		return sqlSession.delete(NAMESPACE + "remove", map);
 	}
 
+	@Override
+	public boolean findExistedSubscription(Map map) throws Exception{
+		int count = sqlSession.selectOne(NAMESPACE + "findExistedSubscription", map);
+		if (count == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	@Override
 	public List<Subscription> findSubscriptionList(String u_id) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "findSubscriptionList", u_id);

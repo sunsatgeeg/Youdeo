@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,54 +27,96 @@
 	<!-- header end -->
 	<!-- wrapper start -->
 	<div id="wrapper">
+		<jsp:include page="include_common_left.jsp" />
 		<div id="content-wrapper">
-			<div>
-				<!-- class="container-fluid pb-0" -->
+			<div class="container-fluid pb-0">
 				<div class="video-block section-padding">
 					<div class="row">
 						<div class="col-md-10">
 							<div class="single-video-left">
 								<div class="single-video">
-									<video width="100%" src="vid/${video.v_uuid}" preload="metadata" controls autoplay></video>
+									<video id="videoplay" width="100%" preload="metadata" controls autoplay>
+										<source src="vid/${video.v_uuid}">
+									</video>
 								</div>
 								<div class="single-video-title box mb-3">
 									<h2>${video.v_title }</h2>
 									<p class="mb-0">
-										<i class="fas fa-eye"></i> ${video.v_views } views
+										<i class="fas fa-eye"></i> <span class="video-views">${video.v_views}</span> <small> · <span class="video-date">${video.v_date }</span></small>
 									</p>
 								</div>
 								<div class="single-video-author box mb-3">
 									<div class="float-right">
-										<button class="btn btn-danger" type="button">
-											Subscribe <strong>1.4M</strong>
-										</button>
-										<button class="btn btn btn-outline-danger" type="button">
-											<i class="fas fa-bell"></i>
-										</button>
+										<button class="btn btn-danger Subscribebtn" type="button" id="${video.user.u_id }">Subscribe</button>
 									</div>
-									<a href="user?u_id=${video.user.u_id}"><img class="img-fluid" src="img/s4.png" alt=""></a>
+									<a href="user?u_id=${video.user.u_id}"><img class="img-fluid" src="img/user/${video.user.u_profileimg }" alt=""></a>
 									<p>
-										<a href="user?u_id=${video.user.u_id}"><strong>${video.user.u_name }</strong></a> <span title="" data-placement="top" data-toggle="tooltip" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></span>
+										<a href="user?u_id=${video.user.u_id}"><strong>${video.user.u_name }</strong></a> <span class="verified" title="" data-placement="top" data-toggle="tooltip" data-original-title="Verified" id="${video.user.u_verified}"><i class="fas fa-check-circle text-success"></i></span>
 									</p>
-									<small>Published on Aug 10, 2018</small>
+									구독자 : <strong>${sub.s_count }명</strong>
 								</div>
 								<div class="single-video-info-content box mb-3">
-									<h6>Cast:</h6>
-									<p>Nathan Drake , Victor Sullivan , Sam Drake , Elena Fisher</p>
-									<h6>Category :</h6>
-									<p>Gaming , PS4 Exclusive , Gameplay , 1080p</p>
 									<h6>About :</h6>
-									<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
-										infancy. Various versions have evolved overVarious versions have evolved over the years, sometimes</p>
-									<h6>Tags :</h6>
-									<p class="tags mb-0">
-										<span><a href="#">Uncharted 4</a></span> <span><a href="#">Playstation 4</a></span> <span><a href="#">Gameplay</a></span> <span><a href="#">1080P</a></span> <span><a href="#">ps4Share</a></span> <span><a href="#">+ 6</a></span>
-									</p>
+									<p>${video.v_description}</p>
+								</div>
+								<div class="mb-1 single-video-comment-tabs">
+									<div class="tab-content">
+										<div class="tab-pane fade active show" id="retro-comments" role="tabpanel" aria-labelledby="retro-comments-tab">
+											<div class="reviews-members pt-0">
+												<div class="media">
+													<input type="text" value="${video.v_no }" id="v_no" hidden="">
+													<input type="text" value="${cmtLastNo }" id="cmt_last_no" hidden="">
+													<c:choose>
+														<c:when test="${!empty(sUserId)}">
+															<a href="user?u_id=${sUserId }"><img class="mr-3" src="img/user/${sUserImage}" alt="Generic placeholder image"></a>
+															<div class="media-body">
+																<div class="form-members-body">
+																	<input type="text" value="${sUserId }" id="u_id" hidden="">
+																	<input type="text" value="${sUser.u_name }" id="u_name" hidden="">
+																	<textarea rows="2" placeholder="Add a public comment..." id="c_content" class="form-control"></textarea>		
+																</div>
+														</c:when>
+														<c:otherwise>
+															<a><img class="mr-3" src="img/user/none.png" alt="Generic placeholder image"></a>
+															<div class="media-body">
+																<div class="form-members-body">
+																	<textarea rows="2" placeholder="Add a public comment..." class="form-control" onclick="location.href='login'"></textarea>
+																</div>
+														</c:otherwise>
+													</c:choose>
+														<div class="form-members-footer text-right mt-2">
+															<button class="btn btn-primary btn-sm cmtSubmitBtn" type="button">COMMENT</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="commentList mb-3">
+									<c:forEach items="${cmtList}" var="cmt">
+										<div class="reviews-members">
+											<div class="media">
+												<a href="user?u_id=${cmt.user.u_id }"><img class="mr-3" src="img/user/${cmt.user.u_profileimg }" alt="Generic placeholder image"></a>
+												<div class="media-body">
+													<div class="reviews-members-header">
+														<h6 class="mb-1">
+															<a class="text-black" href="user?u_id=${cmt.user.u_id }">${cmt.user.u_name} </a> <small class="text-gray"><span class="video-date">${cmt.c_date}</span></small>
+														</h6>
+													</div>
+													<div class="reviews-members-body">
+														<pre>${cmt.c_content}</pre>
+													</div>
+												</div>
+											</div>
+										</div>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="single-video-right">
+								<input type="text" id="video_last_no" value="${vidLastNo }" hidden="">
 								<div class="row">
 									<div class="col-md-12">
 										<div class="adblock">
@@ -84,191 +125,34 @@
 											</div>
 										</div>
 										<div class="main-title">
-											<div class="btn-group float-right right-action">
-												<a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sort by <i class="fa fa-caret-down" aria-hidden="true"></i>
-												</a>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star"></i> &nbsp; Top Rated</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp; Viewed</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; Close</a>
-												</div>
-											</div>
 											<h6>Up Next</h6>
 										</div>
 									</div>
-									<div class="col-md-12">
-										<div class="video-card video-card-list">
-											<div class="video-card-image">
-												<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v1.png" alt=""></a>
-												<div class="time">3:50</div>
-											</div>
-											<div class="video-card-body">
-												<div class="btn-group float-right right-action">
-													<a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star"></i> &nbsp; Top Rated</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp; Viewed</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; Close</a>
+
+									<c:forEach items="${videoList}" var="othervideo">
+										<c:choose>
+											<c:when test="${video.v_no != othervideo.v_no}">
+												<div class="col-md-12">
+													<div class="video-card video-card-list">
+														<div class="video-card-image">
+															<a class="play-icon" href="watch?v_no=${othervideo.v_no}"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="video/${othervideo.v_uuid}_i.png" alt=""></a>
+															<div class="time">${othervideo.v_time }</div>
+														</div>
+														<div class="video-card-body">
+															<div class="video-title">
+																<a href="#">${othervideo.v_title}</a>
+															</div>
+															<div class="video-view">
+																<span class="video-views">${othervideo.v_views}</span> &nbsp; <i class="fas fa-calendar-alt"></i><span class="video-date">${othervideo.v_date }</span>
+															</div>
+														</div>
 													</div>
 												</div>
-												<div class="video-title">
-													<a href="#">Here are many variati of passages of Lorem</a>
-												</div>
-												<div class="video-page text-success">
-													Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-												</div>
-												<div class="video-view">
-													1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-												</div>
-											</div>
-										</div>
-										<div class="video-card video-card-list">
-											<div class="video-card-image">
-												<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v2.png" alt=""></a>
-												<div class="time">3:50</div>
-											</div>
-											<div class="video-card-body">
-												<div class="btn-group float-right right-action">
-													<a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star"></i> &nbsp; Top Rated</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp; Viewed</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; Close</a>
-													</div>
-												</div>
-												<div class="video-title">
-													<a href="#">Duis aute irure dolor in reprehenderit in.</a>
-												</div>
-												<div class="video-page text-success">
-													Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-												</div>
-												<div class="video-view">
-													1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-												</div>
-											</div>
-										</div>
-										<div class="video-card video-card-list">
-											<div class="video-card-image">
-												<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v3.png" alt=""></a>
-												<div class="time">3:50</div>
-											</div>
-											<div class="video-card-body">
-												<div class="btn-group float-right right-action">
-													<a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star"></i> &nbsp; Top Rated</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp; Viewed</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; Close</a>
-													</div>
-												</div>
-												<div class="video-title">
-													<a href="#">Culpa qui officia deserunt mollit anim</a>
-												</div>
-												<div class="video-page text-success">
-													Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-												</div>
-												<div class="video-view">
-													1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-												</div>
-											</div>
-										</div>
-										<div class="video-card video-card-list">
-											<div class="video-card-image">
-												<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v4.png" alt=""></a>
-												<div class="time">3:50</div>
-											</div>
-											<div class="video-card-body">
-												<div class="btn-group float-right right-action">
-													<a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star"></i> &nbsp; Top Rated</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp; Viewed</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; Close</a>
-													</div>
-												</div>
-												<div class="video-title">
-													<a href="#">Deserunt mollit anim id est laborum.</a>
-												</div>
-												<div class="video-page text-success">
-													Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-												</div>
-												<div class="video-view">
-													1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-												</div>
-											</div>
-										</div>
-										<div class="video-card video-card-list">
-											<div class="video-card-image">
-												<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v5.png" alt=""></a>
-												<div class="time">3:50</div>
-											</div>
-											<div class="video-card-body">
-												<div class="btn-group float-right right-action">
-													<a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star"></i> &nbsp; Top Rated</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp; Viewed</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; Close</a>
-													</div>
-												</div>
-												<div class="video-title">
-													<a href="#">Exercitation ullamco laboris nisi ut.</a>
-												</div>
-												<div class="video-page text-success">
-													Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-												</div>
-												<div class="video-view">
-													1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-												</div>
-											</div>
-										</div>
-										<div class="video-card video-card-list">
-											<div class="video-card-image">
-												<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v6.png" alt=""></a>
-												<div class="time">3:50</div>
-											</div>
-											<div class="video-card-body">
-												<div class="btn-group float-right right-action">
-													<a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star"></i> &nbsp; Top Rated</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp; Viewed</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; Close</a>
-													</div>
-												</div>
-												<div class="video-title">
-													<a href="#">There are many variations of passages of Lorem</a>
-												</div>
-												<div class="video-page text-success">
-													Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-												</div>
-												<div class="video-view">
-													1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-												</div>
-											</div>
-										</div>
-										<div class="adblock mt-0">
-											<div class="img">
-												Google AdSense<br> 336 x 280
-											</div>
-										</div>
-										<div class="video-card video-card-list">
-											<div class="video-card-image">
-												<a class="play-icon" href="#"><i class="fas fa-play-circle"></i></a> <a href="#"><img class="img-fluid" src="img/v2.png" alt=""></a>
-												<div class="time">3:50</div>
-											</div>
-											<div class="video-card-body">
-												<div class="btn-group float-right right-action">
-													<a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#"><i class="fas fa-fw fa-star"></i> &nbsp; Top Rated</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp; Viewed</a> <a class="dropdown-item" href="#"><i class="fas fa-fw fa-times-circle"></i> &nbsp; Close</a>
-													</div>
-												</div>
-												<div class="video-title">
-													<a href="#">Duis aute irure dolor in reprehenderit in.</a>
-												</div>
-												<div class="video-page text-success">
-													Education <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></a>
-												</div>
-												<div class="video-view">
-													1.8M views &nbsp;<i class="fas fa-calendar-alt"></i> 11 Months ago
-												</div>
-											</div>
-										</div>
-									</div>
+											</c:when>
+											<c:otherwise>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -277,16 +161,12 @@
 			</div>
 			<!-- wrapper end -->
 			<!-- bottom start -->
-			<div id="footer">
-				<jsp:include page="include_common_bottom.jsp" />
-			</div>
+			<jsp:include page="include_common_bottom.jsp" />
 			<!-- bottom end -->
 		</div>
 	</div>
 	<!-- Scroll to Top Button -->
-	<div id="scrollButton">
-		<jsp:include page="include_common_scroll_button.jsp" />
-	</div>
+	<jsp:include page="include_common_scroll_button.jsp" />
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="vendor/jquery/jquery.min.js"></script>
@@ -297,6 +177,5 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
-
 </body>
 </html>

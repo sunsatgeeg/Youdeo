@@ -17,6 +17,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
+	public boolean findExistedSubscription(Map map) throws Exception{
+		return subscriptionDao.findExistedSubscription(map);
+	}
+	
+	@Override
 	public List<Subscription> findSubscriptionList(String u_id) throws Exception {
 		return subscriptionDao.findSubscriptionList(u_id);
 	}
@@ -37,8 +42,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public int remove(int s_no) throws Exception {
-		return subscriptionDao.remove(s_no);
+	public int remove(Map map) throws Exception {
+		return subscriptionDao.remove(map);
 	}
 
 }

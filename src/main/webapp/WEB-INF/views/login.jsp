@@ -36,7 +36,9 @@
 							</p>
 						</div>
 
+						<input id="loginErrorcode" type="text" value="${errorcode}" hidden="">
 						<div id="login_msg" class="alert alert-danger" role="alert" style="display: none"></div>
+						
 
 						<form name="f">
 							<div class="form-group">
@@ -105,41 +107,5 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			var errorcode = ${errorcode};
-			
-			if(errorcode == -1){
-				return;
-			}else if(errorcode == 0){
-				$('#login_msg').show();
-				$('#login_msg').text('존재하지 않는 아이디입니다.');
-				$('#u_id').addClass('is-invalid');
-			}else if(errorcode == 1){
-				$('#login_msg').show();
-				$('#login_msg').text('잘못된 비밀번호입니다. 다시 시도하세요.');
-				$('#u_password').addClass('is-invalid');
-			}
-		});
-		
-		// 로그인
-		$('.submit').click(function() {
-			if (document.f.u_id.value == "") {
-				alert("사용자 아이디를 입력하십시요.");
-				document.f.u_id.focus();
-				return;
-			}
-			if (document.f.u_password.value == "") {
-				alert("비밀번호를 입력하십시요.");
-				document.f.u_password.focus();
-				return;
-			}
-
-			f.action = 'login_action';
-			f.method = 'POST';
-			f.submit();
-		});
-      </script>
-
 </body>
 </html>

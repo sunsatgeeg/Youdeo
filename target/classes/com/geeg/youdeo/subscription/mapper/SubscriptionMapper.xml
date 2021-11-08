@@ -16,10 +16,14 @@
 	</resultMap>
 
 
-	<insert id="create" parameterType="com.geeg.youdeo.subscription.Subscription">
+	<insert id="create" parameterType="java.util.Map">
 		insert into subscription(s_no, u_id, s_id) 
 		values(subscription_s_no_SEQ.nextval, #{u_id}, #{s_id})
 	</insert>
+
+	<select id="findExistedSubscription" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from subscription where u_id=#{u_id} and s_id=#{s_id}
+	</select>
 
 	<select id="findSubscriptionList" parameterType="java.lang.String" resultMap="SubscriptionWithUserResultMap">
 		select s.s_no, s.u_id, s.s_id, s.s_alram,(select count(*) from subscription s1 where s1.s_id=s.s_id) s_count, u.u_name, u.u_email, u.u_phone, u.u_profileimg, u.u_bannerimg, u.u_verified from subscription s join userinfo u on s.s_id = u.u_id where s.u_id=#{u_id}
@@ -39,9 +43,9 @@
 		where s_no=#{s_no}
 	</update>
 	
-	<delete id="remove" parameterType="java.lang.Integer">
-		delete subscription where
-		s_no=#{s_no}
+	<delete id="remove" parameterType="java.util.Map">
+		delete subscription
+		where s_no = (select s_no from subscription where u_id=#{u_id} and s_id=#{s_id})
 	</delete>
 	
 </mapper>

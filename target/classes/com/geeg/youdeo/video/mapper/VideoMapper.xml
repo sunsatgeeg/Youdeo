@@ -18,6 +18,7 @@
 			<result column="U_ID" property="u_id"/>
 			<result column="U_NAME" property="u_name"/>
 			<result column="U_VERIFIED" property="u_verified"/> 
+			<result column="U_PROFILEIMG" property="u_profileimg"/> 
 		</association>
 	</resultMap>
 
@@ -25,8 +26,8 @@
 		<selectKey keyProperty="v_no" resultType="java.lang.Integer" order="BEFORE" >
 			select video_v_no_SEQ.nextval from dual
 		</selectKey>
-		insert into video(v_no, v_title, v_description, v_category, v_tag, v_uuid, u_id) 
-		values(${v_no}, #{v_title}, #{v_description}, #{v_category}, #{v_tag}, #{v_uuid}, #{u_id})
+		insert into video(v_no, v_title, v_description, v_category, v_tag, v_uuid, v_time, u_id) 
+		values(${v_no}, #{v_title}, #{v_description}, #{v_category}, #{v_tag}, #{v_uuid}, #{v_time}, #{u_id})
 	</insert>
 	 
 	<select id="findVideo" parameterType="java.lang.Integer" resultMap="VideoUserResultMap">
@@ -46,13 +47,18 @@
 		where u_id = #{u_id}
 	</select>
 	
-	<select id="findVideoList" resultType="com.geeg.youdeo.video.Video">
-		select * from video
+	<select id="findVideoList" parameterType="java.lang.Integer" resultMap="VideoUserResultMap">
+		select * from (select rownum as rnum, v.* from (select * from video order by v_date desc) v) v1 join userinfo u on v1.u_id = u.u_id where rnum between #{last_no} and #{last_no}+15 order by rnum
 	</select>
 	
 	<update id="update" parameterType="com.geeg.youdeo.video.Video">
 		update video
 		set v_title=#{v_title}, v_description=#{v_description}, v_category=#{v_category}, v_tag=#{v_tag}
+		where v_no=#{v_no}
+	</update>
+	<update id="updateViewCount" parameterType="java.lang.Integer">
+		update video
+		set v_views=(select v_views from video where v_no=#{v_no})+1
 		where v_no=#{v_no}
 	</update>
 	

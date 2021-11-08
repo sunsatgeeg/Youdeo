@@ -7,7 +7,7 @@ public interface CommentService {
 
 	int create(Map map) throws Exception;
 
-	List<Comment> findCommentList(String v_no) throws Exception;
+	List<Comment> findCommentOrderDateList(Map map) throws Exception;
 
 	int update(Comment comment) throws Exception;
 

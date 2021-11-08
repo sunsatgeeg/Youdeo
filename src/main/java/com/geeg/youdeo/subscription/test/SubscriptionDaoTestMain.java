@@ -21,16 +21,17 @@ public class SubscriptionDaoTestMain {
 		System.out.println("\t" + subscriptionDao);
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_id", "sjssj7777");
+		map.put("u_id", "sjssj77771");
 		map.put("s_id", "admin");
 		
-		System.out.println("\t1. createSubscription -->" + subscriptionDao.create(map));
 		
-		System.out.println("\t2. findSubscriptionList --> " + subscriptionDao.findSubscriptionList("sjssj7777"));
+		//System.out.println("\t1. createSubscription -->" + subscriptionDao.create(map));
+		
+		System.out.println("\t2. findSubscriptionList --> " + subscriptionDao.findExistedSubscription(map));
 		
 		//System.out.println("\t3. updateSubscription -- > " + subscriptionDao.update(new Subscription(1, null, null, 0)));
 		
-		System.out.println("\t4. removeSubscription --> " + subscriptionDao.remove(1));
+		//System.out.println("\t4. removeSubscription --> " + subscriptionDao.remove(1));
 		
 	}
 

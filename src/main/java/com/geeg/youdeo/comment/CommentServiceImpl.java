@@ -17,8 +17,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<Comment> findCommentList(String v_no) throws Exception {
-		return commentDao.findCommentList(v_no);
+	public List<Comment> findCommentOrderDateList(Map map) throws Exception {
+		return commentDao.findCommentOrderDateList(map);
 	}
 
 	@Override

@@ -14,8 +14,9 @@ public interface VideoService {
 	Video findVideo(int v_no) throws Exception;
 
 	int update(Video video) throws Exception;
+	int updateViewCount(int v_no) throws Exception;
 
 	int remove(int v_no) throws Exception;
 
-	List<Video> findVideoList() throws Exception;
+	List<Video> findVideoList(int last_no) throws Exception;
 }

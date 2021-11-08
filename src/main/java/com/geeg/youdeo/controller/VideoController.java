@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import com.geeg.youdeo.comment.Comment;
+import com.geeg.youdeo.comment.CommentService;
 import com.geeg.youdeo.controller.interceptor.LoginCheck;
+import com.geeg.youdeo.subscription.Subscription;
+import com.geeg.youdeo.subscription.SubscriptionService;
 import com.geeg.youdeo.user.User;
 import com.geeg.youdeo.user.UserService;
 import com.geeg.youdeo.video.Video;
@@ -37,6 +42,10 @@ public class VideoController {
 	private VideoService videoService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private SubscriptionService subscriptionService;
+	@Autowired
+	private CommentService commentService;
 	
 	private final String path="/video/";
 
@@ -54,8 +63,21 @@ public class VideoController {
 	
 	@RequestMapping(value = "watch", params ="v_no")
 	public String watch(@RequestParam int v_no, Model model, HttpServletResponse response) throws Exception {
+		videoService.updateViewCount(v_no);
 		Video video = videoService.findVideo(v_no);
+		List<Video> videoList = videoService.findVideoList(1);
+		Subscription subscription = subscriptionService.findSubscriptionCount(video.getUser().getU_id());
+		Map map = new HashMap();
+		map.put("v_no",v_no);
+		map.put("last_no",1);
+		List<Comment> commentList = commentService.findCommentOrderDateList(map);
+		
 		model.addAttribute("video", video);
+		model.addAttribute("videoList", videoList);
+		model.addAttribute("cmtList", commentList);
+		model.addAttribute("sub", subscription);
+		model.addAttribute("vidLastNo", videoList.size());
+		model.addAttribute("cmtLastNo", commentList.size());
 		return "watch";
 	}
 	
@@ -77,6 +99,7 @@ public class VideoController {
 	@LoginCheck
 	@PostMapping(value = "upload_video_action")
 	public String upload_video_action(@RequestParam String uuidFile,
+								      @RequestParam int videoPlayTime,
 								      @RequestParam String v_title,
 								      @RequestParam String v_description,
 								      @RequestParam String v_category,
@@ -101,6 +124,7 @@ public class VideoController {
 			map.put("u_id", sUserId);
 			map.put("v_tag", v_tag);
 			map.put("v_no", 0);
+			map.put("v_time", videoPlayTime);
 			map.put("v_uuid", originalFileName);
 			
 			videoService.create(map);

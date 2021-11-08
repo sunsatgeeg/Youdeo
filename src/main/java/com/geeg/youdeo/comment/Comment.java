@@ -7,7 +7,7 @@ import com.geeg.youdeo.video.Video;
 
 public class Comment {
 	private int c_no;
-	private Date c_date;
+	private String c_date;
 	private String c_content;
 	private User user;
 	private Video video;
@@ -16,7 +16,7 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(int c_no, Date c_date, String c_content, User user, Video video) {
+	public Comment(int c_no, String c_date, String c_content, User user, Video video) {
 		super();
 		this.c_no = c_no;
 		this.c_date = c_date;
@@ -33,11 +33,11 @@ public class Comment {
 		this.c_no = c_no;
 	}
 
-	public Date getC_date() {
+	public String getC_date() {
 		return c_date;
 	}
 
-	public void setC_date(Date c_date) {
+	public void setC_date(String c_date) {
 		this.c_date = c_date;
 	}
 

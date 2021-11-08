@@ -43,15 +43,16 @@
 					</div>
 				</div>
 				<div class="row uploadafter" style="display: none">
+					<video id="videoplay" preload="metadata" src="" hidden=""></video>
 					<div class="col-lg-12">
 						<div class="main-title">
 							<h6>Upload Details</h6>
 						</div>
 					</div>
-					<div class="col-lg-2">
-						<div class="imgplace"></div>
+					<div class="col-lg-4">
+						<img class="img-fluid" src="" alt="">
 					</div>
-					<div class="col-lg-10">
+					<div class="col-lg-8 mb-auto mt-auto">
 						<div class="thumbSelect" style="display: none">
 							<input type="file" id="thumbnailAttachFile" accept=".jpg, .jpeg, .png" class="thumbnail-image-setting__input" style="display: none">
 							<div class="jLsLts">
@@ -86,6 +87,7 @@
 						<div class="osahan-form">
 							<form name='f'>
 								<input id="originalFileName" name="uuidFile" type="text" hidden="">
+								<input id="videoPlayTime" name="videoPlayTime" type="text" value="" hidden="">
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="form-group">
@@ -178,187 +180,5 @@
 		}
 	</script>
 	 -->
-	<script type="text/javascript">
-
-		$("#thumbSubmitBtn").click(function() {
-			$("#thumbnailAttachFile").click();
-		});
-		
-		$("#thumbnailAttachFile").change(function() {
-			var form = $('#thumbnailAttachFile')[0].files[0];
-			var formData = new FormData();
-			var fileSize = form.size;
-
-			if (fileSize >= 3000000) {
-				alert('이미지가 3MB를 초과합니다.');
-
-				return;
-			}
-			formData.append('fileName', $('#originalFileName').val().substring(0, $('#originalFileName').val().lastIndexOf("."))+'_i.png');
-			console.log($('#originalFileName').val().substring(0, $('#originalFileName').val().lastIndexOf(".")));
-			formData.append('thumbnailAttachFile', form);
-			$.ajax({
-				type : 'POST',
-				enctype : 'multipart/form-data',
-				url : 'thumbnail_upload_action',
-				data : formData,
-				processData : false,
-				contentType : false,
-				cache : false,
-				timeout : 600000,
-				success : function(result) {
-					if (result == 'true') {
-						setTimeout(function() {
-							$('.imgplace').attr("style", 'background-image:url("video/' + $('#originalFileName').val().substring(0, $('#originalFileName').val().lastIndexOf(".")) + '_i.png"');
-						}, 1000);
-					}
-				}
-			});
-		});
-		
-		$("#videoSubmitBtn").click(function() {
-			$("#videoAttachFile").click();
-		});
-
-		$(".uploadVideo").click(function() {
-			if ($('input[name=v_title]').val() == "") {
-				alert("영상 제목을 입력하세요.");
-				$('input[name=v_title]').addClass('is-invalid');
-				return;
-			} else {
-				$('input[name=v_title]').removeClass('is-invalid');
-			}
-
-			if ($('input[name=v_description]').val() == "") {
-				alert("영상내용을 입력하세요.");
-				$('input[name=v_description]').addClass('is-invalid');
-				return;
-			} else {
-				$('input[name=v_description]').removeClass('is-invalid');
-			}
-
-			if ($('input[name=v_tag]').val() == "") {
-				alert("태그를 입력하세요");
-				$('input[name=v_tag]').addClass('is-invalid');
-				return;
-			} else {
-				$('input[name=v_tag]').removeClass('is-invalid');
-			}
-			
-			if ($('#upload_action_check').val() == 0) {
-				alert("영상 업로드중입니다.");
-				return;
-			}
-			
-			f.action = 'upload_video_action';
-			f.method = 'POST';
-			f.submit();
-
-		})
-
-		$('#videoAttachFile').change(function() {
-			var form = $('#videoAttachFile')[0].files[0];
-			var formData = new FormData();
-			var fileName = form.name
-			var extName = fileName.substring(fileName.lastIndexOf("."), fileName.length);
-			formData.append('videoAttachFile', form);
-			formData.append('extName', extName);
-
-			$('.uploadbefore').hide();
-			$('.uploadafter').show();
-			$('.uploadafter').show();
-			$.ajax({
-				type : 'POST',
-				url : 'uploading_video',
-				data : formData,
-				cache : false,
-				processData : false,
-				contentType : false,
-				xhr : function() {
-					var xhr = $.ajaxSettings.xhr();
-
-					// Set the onprogress event controller 
-					xhr.upload.onprogress = function(event) {
-						var perc = Math.round((event.loaded / event.total) * 100);
-						$('.progress-bar').css('width', perc + '%');
-					};
-					return xhr;
-				},
-				beforeSend : function(xhr) {
-					$('#alertMsg').text('');
-					$('#progress-bar').css('width', '0%');
-				}
-			}).done(function(msg) {
-				$('#originalFileName').val(msg);
-				$('.thumbSelect').show();
-				$('.pbar').hide();
-				$('.imgplace').attr("style", 'background-image:url("video/' + msg.replace(".mp4","") + '_i.png"');
-				$('#upload_action_check').val('1');
-			}).fail(function(jqXHR) {
-				alert(jqXHR);
-			});
-		});
-
-		var $drop = $('#zone');
-		$drop.on("dragenter", function(e) { //In
-			e.stopPropagation();
-			e.preventDefault();
-
-			$('.fa-file-upload').addClass('file-in')
-		}).on("dragleave", function(e) { //Out
-			e.stopPropagation();
-			e.preventDefault();
-
-			$('.fa-file-upload').removeClass('file-in')
-		}).on("dragover", function(e) {
-			e.stopPropagation();
-			e.preventDefault();
-
-		}).on('drop', function(e) { //Drop
-			e.preventDefault();
-			var formData = new FormData();
-			var fileName = e.originalEvent.dataTransfer.files[0].name
-			var extName = fileName.substring(fileName.lastIndexOf("."), fileName.length);
-			formData.append('videoAttachFile', e.originalEvent.dataTransfer.files[0]);
-			formData.append('extName', extName);
-			
-
-			$('.uploadbefore').hide();
-			$('.uploadafter').show();
-			$('.uploadafter').show();
-			$.ajax({
-				type : 'POST',
-				url : 'uploading_video',
-				data : formData,
-				cache : false,
-				processData : false,
-				contentType : false,
-				xhr : function() {
-					var xhr = $.ajaxSettings.xhr();
-
-					// Set the onprogress event controller 
-					xhr.upload.onprogress = function(event) {
-						var perc = Math.round((event.loaded / event.total) * 100);
-						$('.progress-bar').css('width', perc + '%');
-					};
-					return xhr;
-				},
-				beforeSend : function(xhr) {
-					$('#alertMsg').text('');
-					$('#progress-bar').css('width', '0%');
-				}
-			}).done(function(msg) {
-				$('#originalFileName').val(msg);
-				$('.thumbSelect').show();
-				$('.pbar').hide();
-				$('.imgplace').attr("style", 'background-image:url("video/' + msg.replace(".mp4","") + '_i.png"');
-				$('#upload_action_check').val('1');
-			}).fail(function(jqXHR) {
-				alert(jqXHR);
-			});
-		});
-		
-		
-	</script>
 </body>
 </html>

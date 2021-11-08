@@ -49,8 +49,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "login")
-	public String login(Model model) {
-		model.addAttribute("errorcode", -1);
+	public String login() {
 		return "login";
 	}
 	
@@ -74,7 +73,10 @@ public class UserController {
 			forwardPath="login";
 		}else if(result == 2) {
 			session.setAttribute("sUserId", user.getU_id());
+			session.setAttribute("sUser", userService.findUser(user.getU_id()));
+			session.setAttribute("navSubList", subscriptionService.findSubscriptionList(user.getU_id()));
 			session.setAttribute("sUserImage", userService.findUser(user.getU_id()).getU_profileimg());
+			
 			forwardPath = "redirect:index";
 		}
 		
