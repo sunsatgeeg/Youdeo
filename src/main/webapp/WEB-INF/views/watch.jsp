@@ -68,7 +68,7 @@
 													<input type="text" value="${cmtLastNo }" id="cmt_last_no" hidden="">
 													<c:choose>
 														<c:when test="${!empty(sUserId)}">
-															<a href="user?u_id=${sUserId }"><img class="mr-3" src="img/user/${sUserImage}" alt="Generic placeholder image"></a>
+															<img class="mr-3" src="img/user/${sUserImage}" alt="Generic placeholder image">
 															<div class="media-body">
 																<div class="form-members-body">
 																	<input type="text" value="${sUserId }" id="u_id" hidden="">
@@ -140,7 +140,7 @@
 														</div>
 														<div class="video-card-body">
 															<div class="video-title">
-																<a href="#">${othervideo.v_title}</a>
+																<a href="watch?v_no=${othervideo.v_no}">${othervideo.v_title}</a>
 															</div>
 															<div class="video-view">
 																<span class="video-views">${othervideo.v_views}</span> &nbsp; <i class="fas fa-calendar-alt"></i><span class="video-date">${othervideo.v_date }</span>

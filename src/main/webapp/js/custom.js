@@ -137,7 +137,7 @@ $(window).scroll(function() {
 										</div>
 										<div class="video-card-body">
 											<div class="video-title">
-												<a href="#">${videoJsonObject.title}</a>
+												<a href="watch?v_no=${videoJsonObject.no}">${videoJsonObject.title}</a>
 											</div>
 											<div class="video-view">
 												<span class="video-views">${videoJsonObject.views}</span> &nbsp; <i class="fas fa-calendar-alt"></i><span class="video-date">${videoJsonObject.date}</span>
@@ -181,7 +181,7 @@ $(window).scroll(function() {
 										</div>
 										<div class="video-card-body">
 											<div class="video-title">
-												<a href="#">${videoJsonObject.title}</a>
+												<a href="watch?v_no=${videoJsonObject.no}">${videoJsonObject.title}</a>
 											</div>
 											<div class="video-view">
 												<span class="video-views">${videoJsonObject.views}</span> &nbsp; <i class="fas fa-calendar-alt"></i><span class="video-date">${videoJsonObject.date}</span>
@@ -225,7 +225,7 @@ $(window).scroll(function() {
 										</div>
 										<div class="video-card-body">
 											<div class="video-title">
-												<a href="#">${videoJsonObject.title}</a>
+												<a href="watch?v_no=${videoJsonObject.no}">${videoJsonObject.title}</a>
 											</div>
 											<div class="video-view">
 												<span class="video-views">${videoJsonObject.views}</span> &nbsp; <i class="fas fa-calendar-alt"></i><span class="video-date">${videoJsonObject.date}</span>

@@ -106,7 +106,7 @@
 									</div>
 									<div class="video-card-body">
 										<div class="video-title">
-											<a href="#">${video.v_title}</a>
+											<a href="watch?v_no=${video.v_no}">${video.v_title}</a>
 										</div>
 										<div class="video-view">
 											<span class="video-views">${video.v_views}</span>
