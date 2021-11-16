@@ -40,4 +40,4 @@ insert into video(v_views) values(select v_views from video where v_no=15)+1;
 update video set v_views=(select v_views from video where v_no=15)+1 where v_no=15;
 
 
-select * from (select * from view_history vh join userinfo u on vh.u_id=u.u_id where vh.u_id='sjssj7777') vhu join video v on vhu.v_no=v.v_no;
+select * from (select * from view_history vh join userinfo u on vh.u_id=u.u_id where vh.u_id='sjssj7777') vhu join video v on vhu.v_no=v.v_no order by vh_no desc;
