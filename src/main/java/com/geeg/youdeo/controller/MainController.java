@@ -41,12 +41,5 @@ public class MainController {
 	@RequestMapping(value = "forgot_password")
 	public String forgot_password() {
 		return "forgot_password";
-	}
-
-	@RequestMapping(value = "history_page")
-	public String history_page() {
-		return "history_page";
-	}
-
-	
+	}	
 }

@@ -13,8 +13,10 @@ import com.geeg.youdeo.video.MediaTypeFactory;
 import com.geeg.youdeo.video.Video;
 import com.geeg.youdeo.video.VideoService;
 import com.geeg.youdeo.video.thumbnail.VideoThum;
+import com.geeg.youdeo.view_history.View_historyService;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -27,6 +29,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +46,23 @@ import org.springframework.http.MediaType;
 public class VideoRestController {
 	@Autowired
 	private VideoService videoService;
+	@Autowired
+	private View_historyService view_historyService;
 	
 	private final String path = "/video/";
 
+	@PostMapping(value = "history_create", params ="v_no")
+	public void history_create(@RequestParam int v_no, HttpSession session) throws Exception {
+		String sUserId = (String)session.getAttribute("sUserId");
+		
+		if(!(sUserId == null || sUserId.equals(""))) {
+			Map map = new HashMap();
+			map.put("u_id", sUserId);
+			map.put("v_no", v_no);
+			view_historyService.create(map);
+		}
+	}
+	
 	@PostMapping(value = "uploading_video")
 	public ResponseEntity<?> uploadFile(HttpServletRequest request,
 			@RequestParam("videoAttachFile") MultipartFile multiFile,

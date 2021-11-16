@@ -19,7 +19,7 @@ public class View_historyDaoTestMain {
 		map.put("u_id", "sjssj7777");
 		map.put("v_no", "1");
 		
-		System.out.println("\t1. createView_history -->" + view_historyDao.create(map));
+		//System.out.println("\t1. createView_history -->" + view_historyDao.create(map));
 		
 		System.out.println("\t2. findView_historyList --> " + view_historyDao.findView_historyList("sjssj7777"));
 

@@ -21,6 +21,11 @@ Version: 1.0
 */
 /* Body */
 /* Custom CSS*/
+.nav-hr{
+	border-top: 1px solid #ff516b;
+	margin: 6px 0 0;
+	padding: 2px 14px;
+}
 .pbar{
     margin-top: auto;
     margin-bottom: auto;

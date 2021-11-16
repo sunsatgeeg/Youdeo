@@ -177,10 +177,29 @@
 	<script src="vendor/owl-carousel/owl.carousel.js"></script>
 	<!-- Custom scripts for all pages-->
 	<script src="js/custom.js"></script>
+	
+	<script src="vendor/jquery/jquery.cookie-1.4.1.min.js"></script>
 	<script type="text/javascript">
 		changeDate();
 		chageView();
 		changePlayTime();
+		
+		$(function(){
+			if($.cookie('last_view')==$('#v_no').val()){
+				return;
+			}
+			
+			var formData = new FormData();
+			var v_no = $('#v_no').val();
+			
+			$.ajax({
+				type : 'POST',
+				url : 'history_create?v_no=' + v_no,
+				dataType : 'text'
+			});
+
+			$.cookie('last_view', $('#v_no').val(), { expires: 1 });
+		});
 	</script>
 </body>
 </html>

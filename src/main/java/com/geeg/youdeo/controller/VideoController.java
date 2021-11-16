@@ -35,6 +35,8 @@ import com.geeg.youdeo.user.UserService;
 import com.geeg.youdeo.video.Video;
 import com.geeg.youdeo.video.VideoDao;
 import com.geeg.youdeo.video.VideoService;
+import com.geeg.youdeo.view_history.View_history;
+import com.geeg.youdeo.view_history.View_historyService;
 
 @Controller
 public class VideoController {
@@ -46,9 +48,23 @@ public class VideoController {
 	private SubscriptionService subscriptionService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private View_historyService view_historyService;
 	
 	private final String path="/video/";
 
+	@LoginCheck
+	@RequestMapping(value = "view_history")
+	public String view_history(HttpSession session, Model model) throws Exception {
+		String sUserId = (String)session.getAttribute("sUserId");
+
+		List<View_history> view_histories = view_historyService.findView_historyList(sUserId);
+		
+		model.addAttribute("view_histories", view_histories);
+		
+		return "view_history";
+	}
+	
 	@LoginCheck
 	@RequestMapping(value = "subscriptions")
 	public String testT(HttpSession session, Model model) throws Exception {
@@ -72,14 +88,18 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value = "watch", params ="v_no")
-	public String watch(@RequestParam int v_no, Model model, HttpServletResponse response) throws Exception {
+	public String watch(@RequestParam int v_no, HttpSession session, Model model, HttpServletResponse response) throws Exception {
+		String sUserId = (String)session.getAttribute("sUserId");
 		videoService.updateViewCount(v_no);
+		
 		Video video = videoService.findVideo(v_no);
 		Map map = new HashMap();
 		map.put("start_no", 1);
 		map.put("end_no",13);
 		List<Video> videoList = videoService.findVideoList(map);
+		
 		Subscription subscription = subscriptionService.findSubscriptionCount(video.getUser().getU_id());
+		
 		map = new HashMap();
 		map.put("v_no",v_no);
 		map.put("last_no",1);
